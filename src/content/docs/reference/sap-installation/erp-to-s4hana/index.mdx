@@ -1,0 +1,239 @@
+---
+title: "ERP to S4Hana"
+description: "The following document outlines the most efficient way to move forward with planning a transition from SAP ERP to SAP S4Hana."
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+SAP Readiness Check 2.0
+Transition from SAP ERP to S4Hana
+
+```
+The following document outlines the most efficient way to move forward with planning a transition from SAP ERP to SAP S4Hana. 
+
+As suggested by SAP - "You are planning a transition from your SAP ERP system to SAP S/4HANA. Therefore, you want to use SAP Readiness Check for SAP S/4HANA, checking the readiness of your SAP ERP system or using SAP Business Scenario Recommendations to find the most beneficial scenarios that can enable you to improve your business processes
+
+This SAP Note provides the basic setup to perform SAP Readiness Check for SAP S/4HANA. Moreover, it provides answers to frequently asked questions.".
+
+<PDFEmbed src="/pdf/sap-installation-erp-to-s4hana/1OXjqKq1w6vOheQhAA8QQcLPlucmBypo7.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+29136172021-02-05
+2913617 - SAP Readiness Check 2.0
+Version 8 Type SAP Note
+Language English Master Language English
+Priority Correction with medium priority Category Advance development
+Release Status Released for Customer Released On 20.11.2020
+Component SV-SCS-S4R ( SAP Readiness Check )
+Please find the original document at https://launchpad.support.sap.com/#/notes/ 2913617
+Symptom
+You are planning a transition from your SAP ERP system to SAP S/4HANA. Therefore, you want to use SAP
+Readiness Check for SAP S/4HANA, checking the readiness of your SAP ERP system or using SAP
+Business Scenario Recommendations to find the most beneficial scenarios that can enable you to improve
+your business processes.
+SAP Readiness Check for SAP S/4HANA supports the following releases as source releases: SAP ERP 6.0
+(Enhancement Package 0 to 8) and SAP S/4HANA Finance 1503 and 1605 (technically based on SAP ERP
+6.0 Enhancement Package 7 and8).
+This SAP Note provides the basic setup to perform SAP Readiness Check for SAP S/4HANA. Moreover, it
+provides answers to frequently asked questions.
+Other Terms
+SAP Readiness Check; SAP S/4HANA; System Conversion
+Reason and Prerequisites
+To run SAP Readiness Check for SAP S/4HANA, APIs are required. To install these supporting APIs, implement
+the SAP Notes that are listed in the Discovery Phase and Detailed Planning Phase section below. For more
+information, see the Transition to SAP S/4HANA roadmap.
+Note:
+Always deimplement previous versions of the SAP Note before you implement the new version of the SAP Note.
+In case of an ABAP class inconsistency, please clean up the class header in the SE24 transaction, specify the
+object, and select Utilities -> Regenerate sections in the change mode. If the dependent SAP Note 2310438
+has been implemented before, it needs to be deimplemented first before implementing this SAP Note.
+Discovery Phase:
+Well in advance of a transition from SAP ERP to SAP S/4HANA, you should know more about the technical and
+functional impacts to plan your project accordingly. The following SAP Notes are required to perform the SAP
+Readiness Check analysis for the discovery phase.
+Preparation
+Step
+SAP
+Note
+Component
+for issues MandatoryComment
+Setting up SAP SV-SCS- SAP Note 2758146 is a prerequisite for executing SAP 2758146 Yes
+1 ofÂ© 2021 SAP SE or an SAP  affiliate company. All rights reserved 12
+29136172021-02-05
+Readiness
+Check
+S4R Readiness Check for SAP S/4HANA. Step 1: If you have
+implemented SAP Note 2310438 in your system before, it
+needs to be deimplemented. Otherwise it is not possible to
+implement SAP Note 2758146. Step 2: Implement the
+correction instructions of this note by using SNOTE only.
+This a new note for SAP Readiness Check 2.0 The
+following jobs are related to the SAP Readiness Check
+master report during the report execution:
+RC_COLLECT_ANALYSIS_
+DATA To perform SAP Readiness Check, the Activity 16
+(execution) of authorization object S_DEVELOP is required.
+Set up custom
+code analysis 2185390BC-DWB-
+CEX No
+SAP Note 2185390 is a prerequisite for finding the relevant
+custom code topics in SAP Readiness Check for SAP
+S/4HANA.
+Enabling SAP
+S/4HANA
+sizing
+1872170
+XX-SER-
+SAPSMP-
+ST
+No
+SAP Note 1872170 will enable the SAP HANA sizing data
+collection. If you want to have this data in your analysis,
+please ensure that you always use the latest version of
+/SDF/HDB_SIZING. The following jobs are related to BPA
+during the report execution: TMW_RC_HANAS_DATA_CO
+LL /SDF/HDB_SIZING_SM
+Enabling
+simplification
+item check
+2399707CA-TRS-
+PRCK Yes
+SAP Note 2399707 is a prerequisite for executing SAP
+Readiness Check for SAP S/4HANA. This note is
+responsible for the "Target S/4HANA Version" on
+RC_COLLECT_ANALYSIS_
+DATA. Only implement the correction instruction of SAP
+Note 2399707. Read the description carefully to avoid
+unnecessary work. This specifically applies to SAP Note
+2502552, which is not required for SAP Readiness Check
+for SAP S/4HANA in the discovery phase. The following job
+is related to the simplification item check during the report
+execution: TMW_RC_SITEM_DATA_CO
+LL
+SAP Note 2745851 enables the business process analytics
+data collection. If you want to have this data in your
+analysis, ensure that you always use the latest version of
+this note. Please read the description carefully and make
+sure that the user who will execute the
+RC_COLLECT_ANALYSIS_
+DATA report has the correct authorizations as described in
+SAP Note 2745851. Ensure that the authorization object
+SM_BPM_DET with the characteristic of OBJECT_MS
+(collected KPI´s) is assigned to the user who will execute
+the report. This a new note for SAP Readiness Check 2.0.
+The following jobs are related to the business process
+Enabling
+business
+process
+analytics
+analysis
+2745851
+SV-SMG-
+MON-BPM-
+ANA
+No
+2 ofÂ© 2021 SAP SE or an SAP  affiliate company. All rights reserved 12
+29136172021-02-05
+analytics analysis during the report execution:
+TMW_RC_BPA_DATA_COLL
+Enabling IDOC
+analysis 2769657
+SV-SMG-
+MON-BPM-
+DCM
+No
+SAP Note 2769657 enables the IDOC data collection. If
+you want to have this data in your analysis, ensure that you
+always use the latest version of this note. There are several
+corrections for this SAP Note. If you have not implemented
+version 40 yet, implement version 40 or higher. This a new
+note for SAP Readiness Check 2.0.
+Enabling Data
+Volume
+Management
+analysis
+2721530SV-SMG-
+DVM No
+Follow the instructions that are given in SAP Note 2721530
+to implement the required notes based on your system
+status and to enable the data volume management check.
+The following jobs are related to data volume management
+analysis during the report execution:
+TMW_RC_DVM_DATA_COLL
+BP_APPLICATION_ANALY
+SIS_01 DANA_ANALYSIS TAANA_ANALYSIS
+Enabling
+BP/CVI Check2811183AP-MD-BF-
+SYN No
+SAP Note 2811183 is a prerequisite for finding the KPI’s for
+BP/CVI that will be reflected on the SAP Readiness Check
+dashboard.
+Enable
+Innovation
+Potential check
+in SAP
+Readiness
+Check for SAP
+S/4HANA
+2827612SV-SCS-
+S4R No
+SAP Note 2827612 is a prerequisite for executing the
+innovation potential check in SAP Readiness Check for
+SAP S/4HANA. This a new note for SAP Readiness Check
+2.0.
+Enable Effort
+Drivers of
+Simplification
+Items
+2903677CA-TRS-
+PRCK No
+SAP Note 2903677 is a prerequisite for executing the effort
+drivers of simplification items check in SAP Readiness
+Check for SAP S/4HANA. Once you have implemented this
+SAP Note, a checkbox for the check is available when
+executing the RC_COLLECT_ANALYSIS_
+DATA report. To include the check in the SAP Readiness
+Check analysis, select the checkbox. During the execution
+of the SAP Readiness Check analysis, the
+TMW_RC_EFD_DATA_COLL
+job will be performed. The job is related to the effort drivers
+of simplification items check. This a new SAP Note for SAP
+Readiness Check for SAP S/4HANA.
+Follow the instructions listed in SAP Note 2972792 to
+enable the Financial Data Quality check in SAP Readiness
+Check for SAP S/4HANA. Once you have implemented this
+SAP Note, a checkbox will be available when executing the
+RC_COLLECT_ANALYSIS_
+Enable
+Financial Data
+Quality
+analysis
+2972792SV-SCS-
+S4R No
+3 ofÂ© 2021 SAP SE or an SAP  affiliate company. All rights reserved 12
+29136172021-02-05
+DATA report. To include the Financial Data Quality check in
+the SAP Readiness Check analysis, select the checkbox.
+During the execution, the TMW_RC_FDQ_DATA_COLL
+job will be performed. Please note, once implemented, the
+Financial Data Quality check will remain deselected by
+default. When selected to be in scope, the selection of the
+Schedule Analysis option will initiate a prerequisite note
+check of the system. Any missing notes for the conversion
+reconciliation process will then be provided. These notes
+must be implemented before SAP Readiness Check can be
+scheduled, with this check active. There is the potential,
+depending on the volume of financial data, that this check
+could run longer than other checks. If necessary, it is
+possible to schedule the Financial
+```
+
+</details>
+
+
+

@@ -1,0 +1,42 @@
+# Pages CMS — https://pagescms.org
+# Sign in at app.pagescms.org with GitHub OAuth; this file defines the
+# editing schema for docs.sajivfrancis.com.
+
+media:
+  input: src/assets/img
+  output: /src/assets/img
+
+content:
+  - name: docs
+    label: Docs Pages
+    type: collection
+    path: src/content/docs
+    filename: '{slug}.mdx'
+    view:
+      fields: [title, sidebar.order, draft]
+      sort:
+        - field: sidebar.order
+          direction: asc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Short description (head + listing), type: string }
+      - name: sidebar
+        label: Sidebar
+        type: object
+        fields:
+          - { name: order, label: Order, type: number, default: 100 }
+          - { name: label, label: Label override, type: string }
+      - { name: draft, label: Draft (hide from sidebar), type: boolean, default: false }
+      - { name: tags, label: Tags, type: string, list: true }
+      - { name: body, label: Page content, type: rich-text, required: true }
+
+  - name: pdfs
+    label: Embedded PDFs
+    type: collection
+    path: public/pdf
+    filename: '{slug}.pdf'
+    view:
+      fields: [name]
+
+settings:
+  merge: false

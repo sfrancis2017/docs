@@ -1,0 +1,146 @@
+---
+title: "S4HANA ON Google CLOUD"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+## Installation Video:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/xNDAJy-Bfdg" frameborder="0" allowfullscreen />
+
+## Installation Guide:
+
+<PDFEmbed src="/pdf/sap-installation-gcloud/1dg8mjqdFMhcHZhkUHOK0MSINNnbYtIh7.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/13/2021 SAP HANA deployment guide  |  Google Cloud
+https://cloud.google.com/solutions/sap/docs/sap-hana-deployment-guide 1/20
+This deployment guide shows you how to deploy a SAP HANA system on Google Cloud by
+using Cloud Deployment Manager (/deployment-manager/docs/fundamentals) and a conguration
+le template to dene your installation. The guide helps you congure Compute Engine virtual
+machines (VMs) and persistent disks, as well as the Linux operating system, to achieve the
+best performance for your SAP HANA system. The Deployment Manager template
+incorporates best practices from both Compute Engine and SAP.
+Use this guide to deploy either a single-host scale-up or a multi-host scale-out SAP HANA
+system that does not include standby hosts.
+If you need to include SAP HANA automatic host failover, use the SAP HANA Scale-Out System
+with Host Auto-Failover Deployment Guide
+ (/solutions/sap/docs/sap-hana-ha-scaleout-deployment-guide) instead.
+If you need to deploy a Linux high-availability cluster for a single-host SAP HANA system, use
+the SAP HANA High Availability Cluster on SLES Deployment Guide
+ (/solutions/sap/docs/sap-hana-ha-deployment-guide).
+Prerequisite tasks
+If you don't already have them set up, you need to create a Google Cloud account and project.
+You also need to set up Virtual Private Cloud networking, as well as a method for controlling
+access to your VMs. Finally, you need to load the SAP HANA installation media into a Cloud
+Storage bucket.
+ oid unintentionally exposing your VM instance to the internet, follow these recommendations:
+Use a NAT gateway.
+Create rewall rules (/vpc/docs/using-rewalls#creating_rewall_rules) that block all external access that yo
+don't require.
+When you create your VMs:
+Specify a network tag for each VM for use in routing and rewall rules. If you use the Deployment Mana
+templates that Google Cloud provides, specify a tag with networkTag: [TAG].
+SAP HANA deployment guide
+1/13/2021 SAP HANA deployment guide  |  Google Cloud
+https://cloud.google.com/solutions/sap/docs/sap-hana-deployment-guide 2/20
+Create the VMs without an external IP. If you use the Deployment Manager templates that Google Clou
+provides, specify publicIP: No.
+Seing up your Google account
+A Google account is required to work with GCP.
+1. Sign up for a Google account (https://accounts.google.com/SignUp) if you don't already have
+one.
+2. Log in to the Google Cloud Console, and create a new project
+ (https://console.cloud.google.com/project).
+3. Enable your billing account (/resource-manager/docs/quickstart#create_a_billing_account).
+4. Congure SSH keys so that you are able to use them to SSH into your Compute Engine
+instances. Use the gcloud command-line tool to create a new SSH key
+ (/compute/docs/instances/adding-removing-ssh-keys#createsshkeys), or, if you already have an
+existing SSH key, use the tool to format your existing SSH keys
+ (/compute/docs/instances/adding-removing-ssh-keys#sshkeyformat).
+5. Use the gcloud command-line tool or Cloud Console to add the SSH keys
+ (/compute/docs/instances/adding-removing-ssh-keys#project-wide) to your project metadata.
+This allows you to access any Compute Engine instance created within this project,
+except for instances that explicitly disable project-wide SSH keys.
+Creating a network
+For security purposes, create a new network. You can control who has access by adding
+rewall rules or by using another access control method.
+If your project has a default VPC network, don't use it. Instead, create your own VPC network
+so that the only rewall rules in effect are those that you create explicitly.
+During deployment, VM instances typically require access to the internet to download Google's
+monitoring agent. If you are using one of the SAP-certied Linux images that are available from
+Google Cloud, the VM instance also requires access to the internet in order to register the
+license and to access OS vendor repositories. A conguration with a NAT gateway and with VM
+network tags supports this access, even if the target VMs do not have external IPs.
+1/13/2021 SAP HANA deployment guide  |  Google Cloud
+https://cloud.google.com/solutions/sap/docs/sap-hana-deployment-guide 3/20
+To set up networking:
+1. Go to Cloud Shell.
+Go to Cloud Shell (https://console.cloud.google.com/?cloudshell=true)
+2. To create a new network in the custom subnetworks mode, run:
+where [YOUR_NETWORK_NAME] is the name of the new network. The network name can
+contain only lowercase characters, digits, and the dash character (-).
+Specify --subnet-mode custom to avoid using the default auto mode, which
+automatically creates a subnet in each Compute Engine region. For more information,
+see Subnet creation mode (/vpc/docs/vpc#subnet-ranges).
+3. Create a subnetwork, and specify the region and IP range:
+where:
+[YOUR_SUBNETWORK_NAME] is the new subnetwork.
+[YOUR_NETWORK_NAME] is the name of the network you created in the previous step.
+[REGION] is the region where you want the subnetwork.
+[YOUR_RANGE] is the IP address range, specied in CIDR format
+ (https://wikipedia.org/wiki/Classless_Inter-Domain_Routing), such as 10.1.0.0/24. If you
+plan to add more than one subnetwork, assign non-overlapping CIDR IP ranges for
+each subnetwork in the network. Note that each subnetwork and its internal IP
+ranges are mapped to a single region.
+4. Optionally, repeat the previous step and add additional subnetworks.
+Seing up a NAT gateway
+gcloud compute networks create [YOUR_NETWORK_NAME] --subnet-mode custom
+gcloud compute networks subnets create [YOUR_SUBNETWORK_NAME] \
+        --network [YOUR_NETWORK_NAME] --region [YOUR_REGION] --range [YOUR_R
+1/13/2021 SAP HANA deployment guide  |  Google Cloud
+https://cloud.google.com/solutions/sap/docs/sap-hana-deployment-guide 4/20
+If you intend to create one or more VMs that will not have public IP addresses, you must create
+a NAT gateway so that your VMs can access the Internet to download Google's monitoring
+agent.
+If you intend to assign an external public IP address to your VM, you can skip this step.
+ tant: Do not remove the public IP addresses from your new VMs until after the installation of your SAP softwa
+ ete and validated.
+To create a NAT gateway:
+1. Create a VM to act as the NAT gateway in the subnet you just created:
+where:
+[YOUR_VM_NAME] is the name of the VM you are creating that want to use for the
+NAT gateway.
+[YOUR_ZONE] is the zone where you want the VM.
+[YOUR_IMAGE_FAMILY] and [YOUR_IMAGE_PROJECT] specify the image you want to
+use (/compute/docs/images#os-compute-support) for the NAT gateway.
+[YOUR_MACHINE_TYPE] is any supported machine type. If you expect high network
+trac, choose a machine type with that has at least eight virtual CPUs.
+[YOUR_SUBNETWORK_NAME] is the name of the subnetwork where you want the VM.
+[YOUR_VM_TAG] is a tag that is applied to the VM you are creating. If you use this
+VM as a bastion host, this tag is used to apply the related rewall rule only to this
+VM.
+gcloud compute instances create [YOUR_VM_NAME] --can-ip-forward \
+        --zone [YOUR_ZONE]  --image-family [YOUR_IMAGE_FAMILY] \
+        --image-project [YOUR_IMAGE_PROJECT] \
+        --machine-type=[YOUR_MACHINE_TYPE] --subnet [YOUR_SUBNETWORK_NAME] \
+        --metadata startup-script="sysctl -w net.ipv4.ip_forward=1; iptables
+        -t nat -A POSTROUTING -o eth0 -j MASQUERADE" --tags [YOUR_VM_TAG]
+1/13/2021 SAP HANA deployment guide  |  Google Cloud
+https://cloud.google.com/solutions/sap/docs/sap-hana-deployment-guide 5/20
+2. Create a route that is tagged so that trac passes through the NAT VM instead of the
+default Internet gateway:
+where:
+[YOUR_ROUTE_NAME] is the name of the route you are creating.
+[YOUR_NETWORK_NAME] is the network you created.
+[YOUR_VM_NAME] is the VM you are using for your NAT gateway.
+[YOUR_ZONE] is the zone where the VM is located.
+[YOUR_TAG_NAME] is the tag on the route that directs trac through the NAT VM.
+3. If you also want to use the NAT gateway VM as a bastion host, run t
+```
+
+</details>

@@ -1,0 +1,617 @@
+---
+title: "SAP Account Determination"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+ACCOUNT DETERMINATION - GL, AR/AP, Banking, MM
+
+```
+
+
+## Account Determination - GL
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-account-determination/17dL-u87KZClhGDdrKvY2zYS7snr69xu9.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=a538bb6492b94f0f9295f1e288dd… 2/60
+DAS_Clear Diﬀerences for open items
+Transaction Key DAS_Clear Diﬀerences for open items
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Clear Diﬀerences for Open Items (DSA)
+Open item is an item which has to be cleared with another line item. The balance of an account with
+open item management is equal to the balance of the open items. General ledger accounts are kept with
+open item management if you need to check whether there is an oﬀsetting posting for a given business
+transaction.
+With this Account Determination, it is dened which G/L Accounts are needed to be posted when there
+is a clearing diﬀerence. In the Standard, there will be used two separate G/L Accounts and delivers the
+required posting keys (40/50) for this automatic posting conguration.
+When posting Diﬀerences for Open Items clearing documents, the system takes tolerances into
+accounts. In the system are sample tolerances dened for the standard company codes.
+The acceptable tolerences are dened in the system. The system knows which Tolerances are ac-
+ceptable for example payment diﬀerences.
+Tolerance Groups for Employees
+The Tolerance Groups predene with various amount limits for your employees with which you
+determine account.
+Automatic postings are dened as follows:
+the maximum document amount the employee is authorized to post
+the maximum amount the employee can enter as a line item in a customer or vendor account
+the maximum cash discount percentage the employee can grant in a line item
+the maximum acceptable tolerance for payment diﬀerences for the employee.
+Payment diﬀerences are posted automatically within certain tolerance groups. This way the system can
+post the diﬀerence by correcting the cash discount or by posting to a separate expense or revenue
+the amounts or percentage rates up to which the system is to automatically post to a separate
+expense or revenue account if it is not possible to correct the cash discount or
+up to which diﬀerence amounts the system is to correct the cash discount. In this case the cash
+discount is automatically increased or decreased by the diﬀerence. us-ing tolerance groups.
+You can also additionally diﬀerentiate these settings by company code. Since the same rules usually
+apply to a group of employees, enter the values for employee groups.You can then enter amount limits
+and tolerances per employee group and company code.
+You can also specify tolerances for clearing procedures depending on your customer or ven-dors. The
+lower limits from the customer/vendor specications and employee group are taken in each case during
+clearing.
+Description of Related G/L
+Accounts
+The following accounts are assigned:
+G/L Account Number (I_SAKNR) G/L Acct Long Text (SKAT)
+52080000 Loss from allowed Diﬀerences GL Account
+Clearing
+52580000 Gain from allowed Diﬀerences GL Account
+Clearing
+Accounts used for the Loss from allowed Diﬀerences during G/L Account Clearing and for the Gain from
+allowed Diﬀerences during G/L Account Clearing should be the G/L Account Type “P” for Primary Costs
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=a538bb6492b94f0f9295f1e288dd… 3/60
+or Revenue.
+Posting Examples A Payable for Rent is posted
+Debit Credit
+63005000 - Oﬃce/Building Rent 1000
+EUR
+21720000 - Other Payables (no recon acct) 1000 EUR
+Next transaction is the clearing but a diﬀerence of 50 EUR arises
+Debit Credit
+21720000 - Other Payables (no recon acct)
+950 EUR
+11001000 - Bank 1 - Bank (Main) Account 950 EUR
+Regarding the tolerance group conditions, the 50 EUR diﬀerence are in the 5% acceptance so the
+diﬀerence will be posted.
+Debit Credit
+21720000 - Other Payables (no recon acct) 50
+EUR
+52580000 - Gain from allowed Diﬀerences GL Account
+Clearing 50 EUR
+BNG_Invoiced, but not yet delivered
+Transaction Key BNG_Invoiced, but not yet delivered
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Dene Adjustment Accounts for GR/IR (WRV)
+Postings are made to the goods receipt/invoice receipt (GR/IR) clearing account or to GR/IR
+accounts whenever goods are delivered and invoice receipts are captured with a material
+reference.
+Postings relating to the same purchase order and purchase order item are updated but not
+cleared automatically.
+Goods delivered, but not invoiced
+Goods invoiced, but not delivered
+If the missing goods or the invoice are received, the corresponding GR / IR clearing account is
+debited. The corresponding items are not balanced.
+Before you create the balance sheet, the GR / IR clearing account must be analyzed with a
+program in order to correctly identify the transactions posted to the account.
+The program creates the balance of the items for each reconciliation account and assignment
+number. Is it a credit balance (the goods were delivered, but not calculated) or a debit balance
+(the goods that have been calculated, but not delivered)?
+The program places the necessary adjustment postings in a batch input session. These
+postings are created separately according to the company code, GR / IR clearing account,
+reconciliation account. They business area and are needed to display business transactions
+correctly in the balance sheet. The postings are reversed to the reversal date that you specify
+for the program run.
+Description of Related G/L
+Accounts BNG
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=a538bb6492b94f0f9295f1e288dd… 4/60
+Invoice receipt is in system but good receipt still not posted
+GNB
+Good receipt is posted but invoice receipt still not posted
+Screen elds for conguring the GR/IR Clearing Accounts
+1. Reconciliation Account: Enter the Account to be adjusted
+2. Adjustment Account: Enter the Adjustment Account (technical Account)
+3. Target Account: This is the Account to which the amount is to be posted and the balance
+adjusted (balance sheet account)
+Posting Examples Goods delivered, but not invoiced
+Debit Credit
+13100000 - Inventory - Raw Material 100000 EUR 21120000 - Goods Received/Invoice Received
+100000 EUR
+Goods Invoiced, but not delivered
+Debit Credit
+21120000 - Goods Received/Invoice Received
+100000 EUR
+21100000 - Payables Domestic 100000 EUR
+GNB_Delivered, but not yet invoiced
+Transaction Key GNB_Delivered, but not yet invoiced
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Dene Adjustment Accounts for GR/IR (WRV)
+Postings are made to the goods receipt/invoice receipt (GR/IR) clearing account or to GR/IR
+accounts whenever goods are delivered and invoice receipts are captured with a material
+reference.
+Postings relating to the same purchase order and purchase order item are updated but not
+cleared automatically.
+Goods delivered, but not invoiced
+Goods invoiced, but not delivered
+If the missing goods or the invoice are received, the corresponding GR / IR clearing account is
+debited. The corresponding items are not balanced.
+Before you create the balance sheet, the GR / IR clearing account must be analyzed with a
+program in order to correctly identify the transactions posted to the account.
+The program creates the balance of the items for each reconciliation account and assignment
+number. Is it a credit balance (the goods were delivered, but not calculated) or a debit balance
+(the goods that have been calculated, but not delivered)?
+The program places the necessary adjustment postings in a batch input session. These
+postings are created separately according to the company code, GR / IR clearing account,
+reconciliation account. They business area and are needed to display business transactions
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=a538bb6492b94f0f9295f1e288dd… 5/60
+correctly in the balance sheet. The postings are reversed to the reversal date t
+```
+
+</details>
+
+## Account Determination - AR/AP
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-account-determination/102yjFQRkEhIW0agco7rSglhlzoszRLFW.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=2d4271acf49145d7b5c13a10b811… 2/6
+BSP_Bank Charges
+Transaction Key BSP_Bank Charges
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Dene Accounts for Bank Charges (BSP)
+You dene the account numbers for your bank charges accounts. The system posts the charges which
+you specify in the bank item when settling payments to these accounts.
+Description of Related G/L
+Accounts
+In the predelivered account determination G/L Account 71000000 Bank Charges is used.
+The Bank Charges Account has to be a P&L Account.
+Posting Examples
+Debit Credit
+71000000 Bank Charges 20
+EUR
+Vendor 1000 EUR
+Bank1 out payment 1020 EUR
+SKE_Cash discount received
+Transaction Key SKE_Cash discount received
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Cash discount received (SKE)
+There are 2 diﬀerent procedures when receiving cash discount from vendor:
+1. Net method
+System will calculate cash discount at the time of invoice posting and the same is realized at the
+time of making payment. If the payment is overdue, the amount of discount lost will be shown
+as an expense.
+2. Gross method
+In the gross procedure, the cash discount is not received until payment is made. The expense of
+the invoice remains unchanged and is shown gross in the account statement, that is, including
+the cash discount amounts.
+SKE and SKT are the account determination for the gross procedure.
+The standard transaction key SKE is used to determine accounts or posting keys for line items which
+are created automatically by the system for Cash Discounts received.
+Test script for J60 Accounts Payables
+Invoice Management Reporting
+Description of Related G/L
+Accounts
+The Account for Cash Discounts Received is used typically as a Primary costs or Revenue Account from
+the Income statement Accounts.
+Posting Examples If the payment term mentioned in the invoice is “2/14, Net 30”, this means that the customer is entitled
+to a 2% discount if the payment is made within 14 days of the delivery of goods. If the payment is being
+made beyond 14 days of the delivery of goods then full payment is expected. In any case, the full
+payment is expected to be made within 30 days.
+Goods received
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=2d4271acf49145d7b5c13a10b811… 3/6
+Debit Credit
+13100000 Inventory - Raw
+Material10000EUR
+21100000 Payables Domestic 10000EUR
+Paying the bill within 14 days to get 2% cash discount
+Debit Credit
+21100000 Payables Domestic 10000EUR 11001000 Bank 1 - Bank (Main) Account 9800
+EUR
+70040000 Discount Received 200 EUR
+SKT_Cash discount expenses
+Transaction Key SKT_Cash discount expenses
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Cash discount expenses (SKT)
+There are 2 diﬀerent procedures when receiving cash discount from vendor:
+1. Net method
+System will calculate cash discount at the time of invoice posting and the same is realized at the
+time of making payment. If the payment is overdue, the amount of discount lost will be shown
+as an expense.
+2. Gross method
+System will calculate cash discount at the time of payment posting.
+SKE and SKT are the account determination for the gross procedure.
+The standard transaction key SKT is used to determine accounts or posting keys for line items which
+are created automatically by the system for Cash Discounts granted.
+In this conguration the G/L account number to which the automatic posting for the cash discount is to
+be made is assigned.
+Test script for J59Accounts Payables
+Incoming Payments
+Description of Related G/L
+Accounts
+The Account for Cash Discounts Expense is used typically as aPrimary costs or Revenue Account from
+the Income statement Accounts.
+Posting Examples If the payment term mentioned in the invoice is “2/14, Net 30”, this means that the customer is entitled
+to a 2% discount if the payment is made within 14 days of the delivery of goods. If the payment is being
+made beyond 14 days of the delivery of goods then full payment is expected. In any case, the full
+payment is expected to be made within 30 days.
+Goods delivered
+Debit Credit
+12100000 Receivables Domestic10000EUR 41000000 Revenue Domestic - Product
+10000EUR
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=2d4271acf49145d7b5c13a10b811… 4/6
+The customer pays the bill within 14 days and gets the 2% cash discount
+Debit Credit
+11001000 Bank 1 - Bank (Main) Account 9800
+EUR
+71050000 Cash Discounts Expense 200 EUR
+41000000 Revenue Domestic - Product
+10000EUR
+SKV_Cash discount clearing
+Transaction Key SKV_Cash discount clearing
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key SKV - Cash discount clearing (net method)
+There are 2 diﬀerent procedures when receiving cash discount from vendor:
+1. Net method
+System will calculate cash discount at the time of invoice posting and the same is realized at the
+time of making payment. If the payment is overdue, the amount of discount lost will be shown
+as an expense.
+2. Gross method
+System will calculate cash discount at the time of payment posting.
+SKV and VSK are the account determination for the net procedure.
+With the net procedure, incoming invoices immediately reduce the expense item by the cash discount
+amount. The cash discount is posted to a clearing account controlled by automatic account
+determination SKV. You debit expense and material stock accounts immediately without cash discount,
+which is important for the correct valuation of current assets and xed assets. The clearing account is
+cleared with the payment.
+If the payment period expires and the cash discount cannot be claimed in full, the net procedure
+provides for a further automatic posting (VSK). The loss of cash discount is then debited to a separate
+account.
+Test script for J59Accounts Payables
+Incoming Payments
+Description of Related G/L
+Accounts
+The Account for Clearing Vendor Discounts with the net method is used typically as aBalance Sheet and
+is used as an open item management.
+Posting Examples Paying within the cash discount period
+Vendor invoice:
+Debit Credit
+Expense 980 EUR
+21750000 Clearing Vendor Discounts
+- Net Method 20 EUR
+Vendor 1000 EUR
+Payment posting:
+Debit Credit
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=2d4271acf49145d7b5c13a10b811… 5/6
+Debit Credit
+Vendor 1000 EUR 11001000 Bank 1 - Bank (Main)
+Account 980
+21750000 Clearing Vendor Discounts
+- Net Method 20 EUR
+VSK_Lost cash discount
+Transaction Key VSK_Lost cash discount
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key VSK - Lost cash discount (net procedure)
+There are 2 diﬀerent procedures when receiving cash discount from vendor:
+1. Net method
+System will calculate cash discount at the time of invoice posting and the same is realized at the
+time of making payment. If the payment is overdue, the amount of discount lost will be shown
+as an expense.
+2. Gross method
+System will calculate cash discount at the time of payment posting.
+SKV and VSK are the account determination for the net procedure.
+With the net procedure, incoming invoices immediately reduce the expense item by the cash discount
+amount. The cash discount is posted to a clearing account controlled by automatic account
+determination SKV. You debit expense and material stock accounts immediately without cash discount,
+which is important for the correct valuation of current assets and xed assets. The clearing account is
+cleared with the payment.
+If the payment period expires and the cash discount cannot be claimed in full, the net procedure
+provides for a further automatic posting (VSK). The loss of cash discount is then debited to a separate
+account.
+Test script for J59Accounts Payables
+Incoming Payments
+Description of Re
+```
+
+</details>
+
+## Account Determination - Banking
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-account-determination/1CrYt4aOwR58hgdtjcblagcT6Zcd8kDBu.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=22f737468d78478ca2c5a24475c6… 2/4
+Dene Accounts for Business Transactions in Cash Journal
+Transaction Key Dene Accounts for Business Transactions in Cash Journal
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Account determination in Cash Journal
+The cash journal is a subledger of Bank Accounting. It is used to manage a company's cash
+transactions. The system automatically calculates and displays the opening and closing balances, and
+the receipts and payments totals. You can run several cash journals for each company code. You can
+also carry out postings to G/L accounts, as well as vendor and customer accounts.
+You can create diﬀerent business transactions in Cash Journal. To each of them a business transaction
+type has to be assigned:
+Business transaction
+types
+Description
+E Expense
+R Revenue
+B Cash transfer cash journal to bank
+C Cash transfer bank to cash journal
+D Customer incoming/outgoing payment
+K Vendor outgoing/incoming payment
+There are following two account determination transactions for cash journal:
+Dene Accounts for Cash Journal
+In one company code, one or multiple cash journals are possilbe. For each cash journal, a G/L
+account to which you want to post the cash journal business transactions (usually the petty
+cash account) has to be assigned. In SAP S/4HANA cloud an account is pre-delivered. You can
+replace it with another account by using this account determination transaction.
+Dene Accounts for Business Transactions in Cash Journal
+An expense or revenue or balance sheet account will be assigned to each business transaction
+in cash journal for the oﬀsetting postings of G/L account postings.
+Caution: You must not make entries in this eld for business transaction categories D and K.
+Description of Related G/L
+Accounts Dene Accounts for Cash Journal
+Account 10020000 “Petty Cash Journal” is pre-delivered in SAP’s cloud standard content.
+If you want to replace it with another account, the new account should be a balance sheet
+account and set as “Post automatically only”.
+Dene Accounts for Business Transactions in Cash Journal
+Depending on type of the business transaction , an expense/revenue or balance sheet account
+will be assigned to each business transaction.
+e.g. For business transaction “OFFICE SUPPLIES”, the expense account 65100000 “Oﬃce
+Supplies” can be assgined.
+For business transction “TRANSFER BANK TO JOURNAL”, the bank account 11001010 Bank 1 -
+Cash Payment” can be assigned.
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=22f737468d78478ca2c5a24475c6… 3/4
+Posting Examples Business transaction TRANSFER BANK TO JOURNAL:
+Debit Credit
+10020000 - Petty cash journal 100
+Euro
+11001010 - Bank 1 - Cash Payment 100 Euro
+Dene Accounts in Cash Journal
+Transaction Key Dene Accounts in Cash Journal
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key Account determination in Cash Journal
+The cash journal is a subledger of Bank Accounting. It is used to manage a company's cash
+transactions. The system automatically calculates and displays the opening and closing balances, and
+the receipts and payments totals. You can run several cash journals for each company code. You can
+also carry out postings to G/L accounts, as well as vendor and customer accounts.
+You can create diﬀerent business transactions in Cash Journal. To each of them a business transaction
+type has to be assigned:
+Business transaction
+types
+Description
+E Expense
+R Revenue
+B Cash transfer cash journal to bank
+C Cash transfer bank to cash journal
+D Customer incoming/outgoing payment
+K Vendor outgoing/incoming payment
+There are following two account determination transactions for cash journal:
+Dene Accounts for Cash Journal
+In one company code, one or multiple cash journals are possilbe. For each cash journal, a G/L
+account to which you want to post the cash journal business transactions (usually the petty
+cash account) has to be assigned. In SAP S/4HANA cloud an account is pre-delivered. You can
+replace it with another account by using this account determination transaction.
+Dene Accounts for Business Transactions in Cash Journal
+An expense or revenue or balance sheet account will be assigned to each business transaction
+in cash journal for the oﬀsetting postings of G/L account postings.
+Caution: You must not make entries in this eld for business transaction categories D and K.
+Description of Related G/L
+Accounts Dene Accounts for Cash Journal
+Account 10020000 “Petty Cash Journal” is pre-delivered in SAP’s cloud standard content.
+If you want to replace it with another account, the new account should be a balance sheet
+account and set as “Post automatically only”.
+Dene Accounts for Business Transactions in Cash Journal
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=22f737468d78478ca2c5a24475c6… 4/4
+Depending on type of the business transaction , an expense/revenue or balance sheet account
+will be assigned to each business transaction.
+e.g. For business transaction “OFFICE SUPPLIES”, the expense account 65100000 “Oﬃce
+Supplies” can be assgined.
+For business transction “TRANSFER BANK TO JOURNAL”, the bank account 11001010 Bank 1 -
+Cash Payment” can be assigned.
+Posting Examples Business transaction TRANSFER BANK TO JOURNAL:
+Debit Credit
+10020000 - Petty cash journal 100
+Euro
+11001010 - Bank 1 - Cash Payment 100 Euro
+```
+
+</details>
+
+## Account Determination - MM
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-account-determination/1i7TwXzkIHF9HBiAqyuYTJalPz6Y1kEG2.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=5418c07401044fc5b9758b055bc… 2/13
+WRX_GR/IR clearing account
+Transaction Key WRX_GR/IR clearing account
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key WRX - GR/IR clearing account
+A goods receipt of a material must be posted as result of a standard purchase order.
+When posting the goods receipts for a purchase order, the stock account is posted to the debit.
+However, the oﬀsetting entry is not posted to the liability account but to the GR/IR clearing account.
+The purchase order must not have an account assignment.
+Description of Related G/L
+Accounts
+You can nd the accounts used in this Account Determination Transaction Key in the SAP Best Practices
+Explorer
+ . Go to the Accelerators tab. Open the Excel le with the title Account Determination
+(global). Information about account determination for GR/IR clearing account is available on the T030
+tab.
+The following accounts are e.g. assigned:
+Valuation Class G/L account (SKA1) G/L Account - Credit
+- 21120000
+Goods Received/Invoice
+Received
+21120000
+Goods Received/Invoice
+Received
+The G/L account is a balace sheet account.
+Posting Examples
+Debit Credit
+3100 Trading goods
+/ 13600000 Inventory - Trading
+Goods
+3 EUR (BSX)
+3100 Trading goods
+/ Loss Price Variance (PRD)
+7 EUR
+3100 Trading goods
+/ 2112000 Goods Received/Invoice Received
+10 EUR (WRX)
+E.g. a purchase order of 1 piece is created for the material A. Material A has a standard price of 3 EUR.
+The net price is 10 EUR.
+This purchases order has no account assignment.
+The stock of material A is valuated with the standard price, here 3 EUR. The diﬀerence between
+standard price and net price from the purchase order is posted in the price variance.
+AUM_ Expense/revenue from stock transfer
+Transaction Key AUM_ Expense/revenue from stock transfer
+Maintained with Conguration Item: Account Determination
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=5418c07401044fc5b9758b055bc… 3/13
+Description of Transaction Key AUM - Expense/revenue from stock transfer
+This transaction is used for transfer postings from one material to another if the complete value of the
+issuing material cannot be posted to the value of the receiving material. This applies both to materials
+with standard price control and to materials with moving average price control. Price diﬀerences can
+arise for materials with moving average price if stock levels are negative and the stock value becomes
+unrealistic as a result of the posting. Transaction AUM can be used irrespective of whether the transfer
+posting involves a transfer between plants. The expenditure/income is added to the receiving material.
+Description of Related G/L
+Accounts
+You can nd the accounts used in this Account Determination Transaction Key in the SAP Best Practices
+Explorer
+ . Go to the Accelerators tab. Open the Excel le with the title Account Determination
+(global). Information about account determination for Tax Accounts is available on the T030K tab.
+The following accounts are e.g. assigned:
+Valuation Class G/L account (SKA1) Description (SKAT)
+7920 Finished Goods 52513000 Gain Inventory Transfer (SF &
+Finish Goods)
+Posting Examples
+Debit Credit
+13400000 Inventory - Finished Goods 27,60EUR
+(BSX)
+13600000 Inventory - Trading Goods
+13,50EUR (GBB)
+52513000 Gain Inventory Transfer (SF & Finish Goods)
+(AUM)
+14,10EUR
+Transfer postings from 1 pc from Material 1000 / standard price 13,50 EUR to Material 2000 / standard
+price 27,60 EUR.
+The goods receipt and goods issue posting see transaction key BSX.
+BSX_Inventory posting
+Transaction Key BSX_Inventory posting
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key BSX - Inventory posting
+This transaction is used for all postings to stock accounts. Such postings are aﬀected, for example:
+In inventory management, in the case of goods receipts to own stock and goods issues from
+own stock
+In invoice verication, if price diﬀerences occur in connection with incoming invoices for
+materials valuated at moving average price and there is adequate stock coverage
+In order settlement, if the order is assigned to a material with moving average price and the
+actual costs at the time of settlement vary from the actual costs at the time of goods receipt
+Because this transaction is dependent on the valuation class, it is possible to manage materials with
+diﬀerent valuation classes in separate stock accounts.
+The transaction key BSX is always posted in conjunction with transaction key GBB and the relevant
+account modication code.
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=5418c07401044fc5b9758b055bc… 4/13
+Description of Related G/L
+Accounts
+You can nd the accounts used in this Account Determination Transaction Key in the SAP Best Practices
+Explorer
+ . Go to the Accelerators tab. Open the Excel le with the title Account Determination
+(global). Information about account determination for Tax Accounts is available on the T030K tab.
+The following accounts are e.g. assigned:
+Valuation Class G/L account (SKA1) Description (SKAT)
+3000 Raw Materials 13100000 Inventory - Raw Material
+3040 Spare Parts 13100000 Inventory - Raw Material
+3050 Returnable Packaging 13500000 Inventory - Packaging
+Materials
+3100 Trading goods 13600000 Inventory - Trading Goods
+7900 Seminished Goods 13300000 Inventory - Semi Finished
+Goods
+7920 Finished Goods 13400000 Inventory - Finished Goods
+The G/L account is a balace sheet account.
+Posting Examples
+Debit Credit
+3100 Trading goods / 13600000 Inventory -
+Trading Goods (BSX)
+1000EUR
+3100 Trading goods / 39912000 Inventory - Initial Entry SF
+& Finish Gds Balances (GBB)
+1000EUR
+Goods receipt of one trading good as an inventory in the warehouse.
+Standard price is 1000EUR per pc. Valuation class for trading goods is 3100 Trading goods.
+The account for the goods receipt maintained in the transaction key BSX.
+The account for the oﬀsetting entry for inventory postings is maintained in the transaction key GBB and
+the account modication code BSA
+Debit Credit
+7920 Finished Goods/ 13400000 Inventory -
+Finished Goods (BSX)
+1000EUR
+7920 Finished Goods / 55100000 Finished Goods
+1000EUR (GBB)
+Goods receipt of one nished good from a production order in the warehouse.
+Standard price is 1000EUR per pc. Valuation class for nished goods is 7920 Finished Goods.
+The account for the goods receipt maintained in the transaction key BSX.
+The account for the oﬀsetting entry for inventory postings is maintained in the transaction key GBB and
+the account modication code AUA.
+EIN_Purchase account
+Transaction Key EIN_Purchase account
+Maintained with Conguration Item: Account Determination
+Description of Transaction Key EIN - Purchase account
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=5418c07401044fc5b9758b055bc… 5/13
+Purchase account management has been developed specically for some countries due to specic legal
+requirements (e.g. Belgium, Colombia, Spain, Portugal, France, Italy, Finland). The purchase account
+documents the value that externally procured materials are posted at.
+For goods receipts of account-assigned purchase orders, there are no postings to the purchase
+account.
+Note: Purchase account processing must be active.
+Description of Related G/L
+Accounts
+You can nd the accounts used in this Account Determination Transaction Key in the SAP Best Practices
+Explorer
+ . Go to the Accelerators tab. Open the Excel le with the title Account Determination
+(global). Information about account determination for Purchase Accounts is available on the T030 tab.
+The following accounts are e.g. assigned:
+Valuation Class G/L account (SKA1) G/L Account - Credit
+3000 Raw Materials 68000000
+Purchase Account (Raw)
+68000000
+Purchase Account (Raw)
+3050 Returnable Packaging 68001000
+Purch
+```
+
+</details>

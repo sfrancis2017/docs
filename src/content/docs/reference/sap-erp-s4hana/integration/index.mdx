@@ -1,0 +1,931 @@
+---
+title: "Documents related to third-party Integration"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+DOCS related to third-party integration
+
+```
+## System Landscape Directory (Configuring & Administering) - Business Systems
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1XT5fN1ELuCGR1OXRWiOpboYx8eXlKsAy.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+2/8/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=22611646&topics=48b6847496655295e10000000a… 1/90
+Conguring, Working with and
+Administering System Landscape Dir
+Generated on: 2021-02-08 18:00:40 GMT+0000
+SAP S/4HANA | 1709 Latest
+PUBLIC
+Original content: https://help.sap.com/viewer/4942ﬀ274f6e4e53826039740241ccd0/1709.latest/en-US
+Warning
+This document has been generated from the SAP Help Portal and is an incomplete version of the oﬃcial SAP product
+documentation. The information included in custom documentation may not reect the arrangement of topics in the SAP Help
+Portal, and may be missing important aspects and/or correlations to other topics. For this reason, it is not for productive use.
+For more information, please visit the https://help.sap.com/viewer/disclaimer.
+2/8/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=22611646&topics=48b6847496655295e10000000a… 2/90
+Conguring, Working with and Administering System Landscape Directory
+Use
+A system landscape consists of a number of hardware and software components that depend on each other with regard to
+installation, software updates, upgrades, and demands on interfaces.
+The System Landscape Directory of SAP NetWeaver (SLD) serves as a central information repository for your system landscape.
+For more information, see System Landscape Directory .
+Procedure
+Connecting Systems to the SLD
+Systems that are installed in your system landscape can periodically send data to the SLD. To do so, you have to congure them.
+For more information, see Connecting Systems to the SLD .
+Working with the SLD
+With SLD you can view and manage technical systems, landscapes, business systems, products, and software components.
+For more information, see Working with the SLD
+Administrating the SLD
+The initially congured SLD is ready to provide its services to the systems that are connected to it. Nevertheless, you:
+Might want to change the initial SLD conguration
+Should regularly perform tasks that are vital for the consistent state of your SLD and the information it contains
+For more information, see Administrating the SLD
+System Landscape Directory
+Use
+The System Landscape Directory of SAP NetWeaver (SLD) serves as a central information repository for your system landscape. A
+system landscape consists of a number of hardware and software components that depend on each other with regard to
+installation, software updates, and demands on interfaces.
+Integration
+The gure below shows the ow of data between the SLD and other components.
+  Note
+Bear in mind that the abbreviation SLD is not intended to dene a product, since the System Landscape Directory is part of
+SAP NetWeaver. This abbreviation is only intended to improve readability.
+2/8/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=22611646&topics=48b6847496655295e10000000a… 3/90
+Information in the SLD is used by various SAP tools, such as SAP Solution Manager and SAP NetWeaver Administrator.
+Features
+SLD stores information about all installable and installed components of a system landscape. SLD is based on the
+Common Information Model (CIM) standard. This standard is a general, extensible schema for describing the elements in a
+system landscape. SAP has enhanced the CIM standard with classes for SAP-specic content.
+SAP provides both a Web-based user interface (UI) for interactive access and client APIs for programmatic access in ABAP
+and Java.
+SLD provides information about installable SAP software, dependencies and recommended scenarios and regularly
+publishes updates on SAP Service Marketplace. You can browse this information in the software catalog views. You can also
+manually add information about third-party components to the SLD.
+SAP software components that are installed on technical systems are registered automatically and on a regular basis in the
+SLD. Thus the SLD always contains up-to-date information about the installed system landscape. You can view this
+information in the technical systems views, and can aggregate and group it in the landscapes views.
+In addition, you can use the SLD to reserve component names in the SAP NetWeaver Developer Infrastructure (NWDI). It
+contains the master list of all reserved names used in development, such as development component names, Java package
+names, and database object names.
+SAP Process Integration (PI) uses the SLD to store information about business systems, which are logically connected to
+technical systems.
+More Information
+2/8/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=22611646&topics=48b6847496655295e10000000a… 4/90
+Common Information Model
+Architecture Overview of the SLD Data Suppliers
+ABAP Data Collection Programs
+Common Information Model
+Use
+The Common Information Model (CIM) is a standard of the Distributed Management Task Force (DMTF) and is based on the
+object-oriented modeling approach. This standard provides an implementation-neutral schema to describe management
+information within a computing environment. For more information about CIM and DMTF, see http:// www.dmtf.org .
+CIM is designed to model hardware and software elements. It provides a hierarchical set of core classes, which can be extended
+with application-specic classes.
+The SLD is currently based on CIM model 2.9.
+Each CIM class has one or more key properties, and a number of additional properties. Each class has an arbitrary number of
+instances, which contain the actual data. An instance can be uniquely identied by its set of key values.
+Classes can be grouped in schemas. The SLD model provides three schemas: component data for installable software, landscape
+data for installed software and hardware, and name reservation data used in software development.
+A special feature of CIM is the association between the classes. Associations are also classes that have two reference keys, each of
+which identies exactly one CIM instance. An association therefore connects two instances, as shown in the gure below:
+Architecture Overview of the SLD Data Suppliers
+Use
+Besides component information, the SLD stores information about the current system landscape. A data collection process in
+each technical system in the landscape can provide this information to the SLD. This process is managed by the data supplier
+administration. The data suppliers collect data not only about SAP systems (SAP products, database parameters, hosts, clients,
+and so on), but also about any third-party products that are installed.
+Data Collection Process
+As shown in the gure below, the data suppliers deliver information about the installed elements in a particular system, update
+this data periodically, and send it to the SLD server by means of CIM over HTTP.
+2/8/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=22611646&topics=48b6847496655295e10000000a… 5/90
+Currently, there are data suppliers available for all ABAP-based systems as of SAP Basis release 4.0B and for all Java EE based
+systems as of SAP NetWeaver 6.40.
+Data Sending Process
+The gure below shows how the SLD data suppliers send data to the SLD server:
+The ABAP-based data supplier uses an RFC connection to send data to the SLD bridge by means of a gateway and an RFC
+server.
+The Java EE based data supplier uses HTTP to send data to the SLD bridge by means of an HTTP servlet.
+The SLD bridge receives the reported data and converts it into the format that is dened in the Web-Based Enterprise
+Management (WBEM) standard (see http://www.dmtf.org/standards/wbem
+ ). The SLD bridge then stores the data in the SLD
+server.
+  Note
+As of SAP NetWeaver 7.1, usage type AS Java that comprises SLD also contains an Gateway.
+  Note
+If you have installed multiple SLD servers (for example, for security purposes), the SLD bridge can be congured to forward
+data to each of these servers. In the gure above, one SLD server has been installed locally (indicated by 1 in the gure) and
+m
+```
+
+</details>
+
+## Customer/Vendor Integration:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1jwfSplCl-RvogKLotS0EHcvgHf0471uX.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+SAP S/4HANA Cookbook
+Customer/Vendor Integration
+CUSTOMER
+2
+TABLE OF CONTENTS
+1. PURPOSE AND SCOPE OF THE DOCUMENT ................................................................................ 5
+2. CONTEXT AND MOTIVATION FOR CUSTOMER/VENDOR INTEGRATION .................................. 6
+3. BUSINESS IMPACT ........................................................................................................................... 8
+4. SOLUTION IMPACT ......................................................................................................................... 10
+4.1. Fiori App: Manage Customer Master Data ................................................................................... 10
+4.2. Fiori App: Manage Supplier Master Data ...................................................................................... 10
+4.3. Business Partner Authorizations .................................................................................................. 11
+4.4. Conversion Process Authorizations ............................................................................................. 12
+4.5. Customer Hierarchies ..................................................................................................................... 12
+4.6. Customer Classifications ............................................................................................................... 12
+4.7. Usage of Time-Dependency ........................................................................................................... 12
+5. CVI CONVERSION SCENARIOS ..................................................................................................... 13
+6. CVI CONVERSION ON PREMISE NEW INSTALL .......................................................................... 15
+6.1. Configuration ................................................................................................................................... 15
+6.2. Migration / BP update ..................................................................................................................... 16
+7. CVI CONVERSION ON PREMISE SYSTEM CONVERSION .......................................................... 17
+7.1. Overview and Phased Approach ................................................................................................... 17
+7.2. CVI Cockpit ...................................................................................................................................... 17
+7.3. Preparation ...................................................................................................................................... 20
+7.3.1. TCI Note for CVI ............................................................................................................................... 20
+7.3.2. S/4HANA Pre-Checks and Check Reports .................................................................................... 20
+7.3.2.1. Master Data Cleansing: Master Data Consistency Check ....................................................... 21
+7.3.2.2. CVI Customizing – Check ........................................................................................................... 23
+7.3.2.3. CVI Completeness – Check ........................................................................................................ 24
+7.3.3. Archive Customer/Vendor data with deletion flag ....................................................................... 24
+7.3.4. Check dependencies with SAP CRM............................................................................................. 25
+7.3.5. Contact Person mapping ................................................................................................................ 25
+7.3.6. Activate Business Functions ......................................................................................................... 25
+7.3.7. Check and integrate Customer/Vendor enhancements .............................................................. 26
+7.3.8. Check and adjust CVI/BP Customizing ......................................................................................... 27
+7.3.9. Preparation for linking of Customer and Vendor to a single Business Partner  ....................... 48
+7.3.10. Preparation for converting HCM Employees to Business Partners ....................................... 48
+7.4. Synchronization .............................................................................................................................. 49
+7.4.1. Synchronization Cockpit ................................................................................................................ 50
+7.4.2. Post Processing Office (PPO) ........................................................................................................ 57
+7.4.3. Example - Resolve Synchronization Errors Using PPO .............................................................. 59
+7.4.4. Check Completion of Synchronization ......................................................................................... 63
+7.4.5. Configuration and Master Data Issues.......................................................................................... 63
+3
+7.5. Conversion Process ....................................................................................................................... 76
+7.5.1. CVI Conversion Approach: Key Considerations ......................................................................... 77
+7.5.2. CVI Conversion Approach: Example ............................................................................................ 77
+7.5.3. Bypassing CVI Pre-check during SUM run (for Proof of Concept use ONLY) .......................... 78
+7.5.4. Tips and Tricks ................................................................................................................................ 78
+7.6. Post Processing .............................................................................................................................. 79
+7.6.1. Activate Creation of Post Processing Orders (Direction BP to Customer/Vendor)  ................. 79
+7.6.2. Activate Synchronization Options (Direction BP to Customer/Vendor) .................................... 80
+7.6.3. Set BP Role Category for Direction BP to Customer .................................................................. 81
+7.6.4. Number assignment (CVI-Target: Customer/Vendor) ................................................................. 82
+7.6.5. Change Field Status of Account Groups ...................................................................................... 83
+7.6.6. Industry Mapping ............................................................................................................................ 83
+7.6.7. General Mapping Checks ............................................................................................................... 83
+7.6.8. Tipps and Tricks .............................................................................................................................. 84
+8. IMPACT ON CUSTOM CODE .......................................................................................................... 85
+9. IMPACT ON SURROUNDING SYSTEMS / OTHER APPLICATIONS ............................................ 86
+9.1. Interfaces ......................................................................................................................................... 86
+9.1.1. General Information ........................................................................................................................ 86
+9.1.2. IDocs DEBMAS/CREMAS in S/4HANA .......................................................................................... 86
+9.2. Employee Replication ..................................................................................................................... 86
+9.3. Credit Management .................................
+```
+
+</details>
+
+## Integration Capabilities of S4HANA:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1JP9zWp4rzcW0xVmxcWQBo_2TYuVISjYf.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Document Version: 1.00 – 2016-03-01
+PUBLIC
+Integration Capabilities of SAP S/4HANA to SAP
+Cloud Solutions
+What you need to know when it comes to SAP S/4HANA integration
+Javit Gellaw (SAP SE)
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      2
+Table of Contents
+1 INTRODUCTION-------------------------------- -------------------------------- -------------------------------  3
+2 SAP S/4HANA, ON-PREMISE EDITION INTEGRATION -------------------------------- ------------------ 4
+3 SAP S/4HANA, CLOUD EDITION INTEGRATION -------------------------------- ------------------------- 5
+4 WHY DOES SAP PROCESS  INTEGRATION MATTER A ND HOW DOES SAP HANA  CLOUD
+INTEGRATION DIFFER FROM SAP PROCESS ORCHESTRATION? -------------------------------- ----- 6
+5 CONCLUSION -------------------------------- -------------------------------- -------------------------------- - 8
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      3
+1 Introduction
+SAP S/4HANA is the next-generation business suite product that provides innovated and tightly
+coupled solutions that support end-to-end business processes integration between SAP S/4HANA
+core components and SAP software-as-a-service (SaaS) cloud solutions such as SAP Ariba, SAP
+SuccessFactors, SAP Fieldglass, Concur, SAP Hybris, SAP Cloud for Customer, SAP Financial
+Services Network, and other third-party solutions like Vertex for tax calculation.
+Figure 1: Integration path of SAP S/4HANA, on premise and cloud editions
+SAP offers two different deployment options to integrate SAP S/4HANA, namely SAP S/4HANA, on-
+premise edition and SAP S/4HANA, cloud edition.
+Currently, there are three different offerings available as part of the SAP S/4HANA, cloud edition:
+ SAP S/4HANA, cloud marketing edition
+ SAP S/4HANA, cloud project services edition
+ SAP S/4HANA, cloud enterprise edition
+These also offer prepackaged integration best practices content and engineered services for SAP
+S/4HANA and to the existing cloud solutions.
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      4
+2 SAP S/4HANA, On-Premise Edition Integration
+Depending on the customer requirements the SAP S/4HANA, on premise integration scenario offers
+a business scope including SAP S/4HANA Enterprise Management processes as well as integration
+best practice content with SAP’s SaaS cloud solutions and third-party applications using SAP
+Process Orchestration, Web services, or SAP HANA Cloud Integration.
+Figure 2: Integration path of SAP S/4HANA, on premise edition to cloud solutions from SAP
+SAP HANA Cloud Integration (HCI) is SAPs cloud integration middleware and is a SaaS product that
+provides standard integration content delivered by SAP to integrate SAP SuccessFactors, SAP
+Ariba, SAP Financial Services Network and SAP Cloud for Customer with SAP S/HANA on premise
+systems or even SAP ERP.
+The SAP S/4HANA, on premise edition can be used as an install-based system or hosted on SAP
+HANA Enterprise Cloud. Customers can leverage it either by downloading the packaged best
+practices from the SAP Service Marketplace or via engineered service. The best practices can be
+deployed on the customer landscape or hosted in the cloud.
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      5
+3 SAP S/4HANA, Cloud Edition Integration
+Other than the on premise edition, SAP S/4HANA, cloud edition is designed for enterprises that need
+standardized cloud integration offerings that cover the core business scenarios and the line-of-
+business cloud solutions. For the cloud edition, the main integration technologies are SAP HANA
+Cloud Integration and Web services.
+Based on the selected scope and subscription model, customers can leverage the fully integrated,
+secured, and managed SAP S/4HANA, cloud edition by SAP. In most cases, the required customer
+integration scenarios are provisioned, configured, and activated from SAP Cloud Operations and
+SAP Cloud Service Center, or SAP provides self-configuration user interfaces so customers are able
+to configure the solution.
+The current SAP S/4HANA, cloud edition already covers specific business scenarios for the
+marketing line of business and for the professional services industry. The enterprise edition includes:
+finance, accounting, controlling, procurement, sales, manufacturing, plant maintenance, project
+system, and product lifecycle management. The content is integrated with SAP cloud solutions such
+as SAP SuccessFactors Employee Central, SAP Ariba, SAP Hybris Marketing, SAP Jam, SAP
+Financial Services Network, and third-party integration with Vertex for tax calculation. Three offerings
+are currently available as part of SAP S/4HANA, cloud edition:
+ SAP S/4HANA, cloud marketing edition – for the marketing line of business
+ SAP S/4HANA, cloud project services edition – for the professional services industry
+ SAP S/4HANA, cloud enterprise edition – for a full ERP scope
+Figure 3: Integration path of SAP S/4HANA, cloud edition to cloud solutions from SAP
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      6
+Furthermore, SAP HANA Cloud Platform (HCP) serves as an extension platform for SAP S/4HANA.
+Customers and partners are able to build specific capabilities extending the scope of SAP S/4HANA
+by integrating non-SAP solutions or developing new capabilities using the whitelisted APIs.
+The following figure illustrates the integration technology options for S/4HANA, on premise and cloud
+editions:
+SAP S/4HANA integration options
+SAP HANA Cloud Integration X X
+Web services X X
+SAP Process Orchestration X
+Figure 2: Integration path of SAP S/4HANA, on premise edition to cloud solutions from SAP
+4 Why Does SAP Process Integration Matter and How Does SAP HANA
+Cloud Integration Differ from SAP Process Orchestration?
+Imagine you own an on premise HCM application. It is up and running in your system landscape and
+you want to innovate and integrate your HR business processes or master data with SAP
+SuccessFactors cloud-based applications. Similar to any A2A integration, you need to ensure that
+data and processes are integrated accurately and reliably. Furthermore, HR employees might need
+to access data from different HR applications, such as replicating employee data from SAP Success
+Factors Employee Central to an SAP S/4HANA application or cost center data from an SAP
+S/4HANA financial application to SAP SuccessFactors Employee Central. Depending on the
+deployment model, the integration of both on premise and cloud-based applications can be realized
+through Web services, the on premise SAP Process Orchestration, or SAP HANA Cloud Integration
+middleware and ensure that data and processes are secured, mapped, and transferred properly.
+SAP S/4HANA,
+on-premise edition
+SAP S/4HANA,
+cloud edition
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+Integration Capabilities of SAP S/4HANA to SAP Cloud Solutions
+PUBLIC
+© 2016 SAP AG. All rights reserved.      7
+Figure 4: Sample integration options for SAP S/4HANA and SAP SuccessFactors Employee Central
+SAP HANA Cloud Integration is not the only product for which SAP provides integration middleware.
+The integration content offered by SAP for SAP HANA Cloud Integration can be viewed
+at https://cloudintegration.hana.ondemand.com. SAP offers many standard integration capabilities
+and content for SAP Process Orchestration. However, SAP HANA Cloud Integration is not only the
+standard content. The management and monitoring of this
+```
+
+</details>
+
+
+## SAP Concur Integration Setup Guide:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1rjZ5r8_3Gw1Hlj9p6sq9vBrXD12vTEyq.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+© 2020 SAP SE or an SAP affiliate company. All rights reserved.
+PUBLIC
+Integrating SAP S/4HANA Systems with SAP Concur
+Document Version: 2020 – 2020-10-07
+SAP Integration with Concur Solutions – Setup Guide
+Connecting SAP S/4HANA with SAP Concur
+1 Introduction
+2 Prerequisites in the Concur System
+3 Setting Up the SAP System
+3.1 Setting Up the System Connection
+3.2 Setting Up the Employee Export
+3.3 Cost Object Export
+3.3.1 Setting Up the Cost Center Export
+3.3.2 Setting Up the Internal Order Export
+3.3.3 Setting Up the Network Export
+3.3.4 Setting Up the Network Activity Export
+3.3.5 Setting Up the Project WBS Element Export
+3.3.6 Setting Up the Sales Order Item Export
+3.3.7 Setting Up the Maintenance Order Export
+3.3.8 Setting Up the QM Order Export
+3.3.9 Setting Up the Production Order Export
+3.4 Exchange Rate Export
+3.4.1 Overview
+3.4.2 Setting Up the Exchange Rate Export
+3.5 Financial Posting Import
+3.5.1 Overview
+3.5.2 Setting Up the Financial Posting Import
+3.6 Payroll Import
+3.6.1 Overview
+3.6.2 Setting Up the Payroll Import
+3.7 Travel Request
+3.7.1 Overview
+3.7.2 Setting Up the Travel Request Import
+4 Communication Monitor
+5 Concur Documents
+6 Data Protection and Privacy
+SAP Integration with Concur Solutions__________________________________________________________________________________________
+__________________________________________________________________________________________
+SAP SE 2
+7 Business Add-Ins (BAdIs) - Overview
+7.1 Finance BAdIs
+7.1.1 Posting Expense Reports and Cash Advances
+7.1.1.1 Enhance Incoming Posting Data from Concur
+7.1.1.2 Minor Field Changes
+7.1.1.3 Customer-Specific Report Entry
+7.1.1.4 Change Posting Data
+7.1.1.5 Change Settings for Attachment Handling
+7.1.1.6 Adjust Amount Fields According to Decimal Places of Deviating Currency
+7.1.1.7 Process the Financial Posting Document
+7.1.1.8 Add Data for Cash Advances
+7.1.2 Cost Objects
+7.1.2.1 Change Cost Object Data
+7.1.2.2 Customer-Specific Hierarchy Level for Concur List
+7.2 HCM BAdIs
+7.2.1 Change Employee Data
+7.2.2 Payroll
+7.2.2.1 Enhance Incoming Data from Concur
+7.2.2.2 Minor Field Changes
+7.2.2.3 Change Infotype Data
+7.2.2.4 Adjust Amount Fields According to Decimal Places of Deviating Currency
+7.3 Travel Request BAdIs
+7.3.1 Enhance Travel Request Posting Data
+7.3.2 Change Incoming Travel Request Posting Data
+7.3.3 Adjust Amount Fields According to Decimal Places of Deviating Currency
+SAP Integration with Concur Solutions__________________________________________________________________________________________
+__________________________________________________________________________________________
+SAP SE 3
+1 Introduction
+Welcome to the integration scenario that enables you to connect your SAP on-premise system with SAP
+Concur.
+This guide covers Employee, Cost Objects, Financial Posting, Payroll, and Travel Requests. You can also
+find the documentation directly in the system while implementing, for instance as part of the guided
+activities. This setup guide is a collection of all available information for you to read as a coherent
+document.
+In the area of Travel and Expense Management, employee master data is sent from the SAP to the Concur
+system. As a result, the employees receive a user for the Concur system and can create expenses. To
+assign the expenses to cost objects, the cost object master data is exported from SAP to Concur. The data
+is then available in Concur list(s) and can be selected from the corresponding entry help when allocating
+expenses. It is very important to know that if data is changed in the Concur system only, the SAP system
+is not automatically updated accordingly. A re-export from the SAP system is the only way to synchronize
+the data again. At the moment, it is not possible to protect the synchronized data on Concur side. For this
+reason, remember to make changes to the master data in the original system.
+As soon as a submitted expense report is approved, it lands in the Concur queue from where it is imported
+into the SAP system to be posted. If a payroll system is connected, the process is repeated for the
+corresponding payroll document.
+The data exchange between the SAP and Concur systems is called the Feedback Loop. You'll find more
+information about this topic in the Concur Documents chapter.
+SAP Integration with Concur Solutions__________________________________________________________________________________________
+__________________________________________________________________________________________
+SAP SE 4
+2 Prerequisites in the Concur System
+For information about the configuration steps you need to carry out in the Concur system, please refer to
+the SAP ICS for SAP ERP: On-Premise and S/4HANA: On Premise guide which you can find on
+the SAP Help Portal:
+1. Go to sap.help.com.
+2. Call up the Integrating SAP On-Premise Systems with SAP Concur product page.
+3. Choose SAP Integration with Concur Solution Guides under the SAP Concur Documentation
+section on the right.
+There you'll find all required settings for the following areas:
+- Partner application activation
+- Required roles for the API calls
+- Group configuration for the API calls
+- List creation for the cost object hierarchy
+- Form maintenance, for instance, for employee vendor ID
+- Configure Copy Down of cost objects to allocation level
+- Processor step
+- Specify accounts
+- Specify tax codes
+- Specify wage types for payroll
+SAP Integration with Concur Solutions__________________________________________________________________________________________
+__________________________________________________________________________________________
+SAP SE 5
+3 Setting Up the SAP System
+We have prepared guided activities (wizards) to help you set up the integration. Use transaction
+CTE_SETUP to call up the Setting Up the Integration with SAP Concur screen, where you'll find all
+activities that you previously selected for your integration.
+- System
+This is the starting point from where you can set up the actual connection between the systems.
+Choose Create Connection if you're setting up the connection for the first time or Change
+Connection to modify your settings. The Setting Up the System Connection wizard opens which
+leads you through every configuration step.
+- Employee
+Helps you configure all related travel and expense data.
+- Cost Object Types
+Use these wizards to export cost objects of the different cost object types. You need them to assign
+expenses to the cost objects and to post your expenses accordingly.
+- Cost Center
+- Internal Order
+- Network
+- Network Activity
+- Sales Order Item
+- Maintenance Order
+- Production Order (for PP - production planning)
+- QM Order
+- Project WBS Element (Work Breakdown Structure)
+- Exchange Rate
+Ensures that your SAP and Concur systems are using the same exchange rates.
+- Financial Posting
+Includes cash advances and expense reports.
+For expense reports, you also have the opportunity to enable credit cards that are billed to the
+employee but paid by the company (Individually Billed Company Paid). To ensure PCI compliance,
+Concur provides SAP with a token instead of the credit card number. The card number itself is never
+stored in the SAP system. When the number is needed for the payment run, create an SAP certificate
+by using the Generate Certificate button. With this certificate, the card number can be encrypted by
+Concur. The credit card number can then only be decrypted by the SAP system, if the certificate was
+generated successfully and the client credentials were specified in the Setting Up the System
+Connection wizard.
+In addition, you can allow the import of attachments assigned to expense reports. After the expense
+report was posted successfully, any attachments that were appended to the expense report are
+retrieved by the system and added to the financial document.
+- Payroll
+Use the respective expense report data to pay out your employees within a payroll run or for tax
+purposes. This integration activity considers tax-rele
+```
+
+</details>
+
+
+## SAP Transportation Management Integration Guide:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/12SPQ8zbH6ZBc0AfRDMP6fetP3qqM413d.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+INTEGRATION GUIDE | PUBLIC
+SAP TM 9.6 FPS02
+2019-10-09
+Basic Settings for SAP Transportation
+Management
+© 2019 SAP SE or an SAP affiliate company. All rights reserved.
+THE BEST RUN
+Content
+1 Basic Settings for SAP Transportation Management................................. 5
+2 Technical Settings........................................................... 11
+2.1 Naming Logical Systems for the Connection to SAP ERP and SAP TM........................ 11
+2.2 Assigning Logical Systems to Clients............................................... 12
+2.3 Defining SLD Data of Business Systems............................................ 12
+2.4 Maintaining Business System Groups.............................................. 13
+2.5 Assigning Logical Systems and Queue T ypes......................................... 14
+2.6 Activating Queues............................................................ 15
+2.7 Creating Active Versions and Models............................................... 15
+2.8 Activating Business Functions................................................... 16
+2.9 Activating Error and Conflict Handler.............................................. 16
+2.10 Defining Resolution Strategy.................................................... 17
+3 General Customizing Settings................................................. 20
+3.1 Defining Capacity Variants...................................................... 20
+3.2 Creating ISO Units........................................................... 20
+3.3 Creating Units of Measurement.................................................. 21
+3.4 Changing Units of Measurement................................................. 22
+3.5 Defining T ransportation Service Level Codes......................................... 22
+3.6 Maintaining T ransportation Groups................................................ 23
+3.7 Specifying Language Selection.................................................. 24
+3.8 Activating Usage of T ransportation Allocations....................................... 24
+3.9 Defining Stage T ype Sequence for Movement T ypes.................................... 25
+3.10 Displaying SAP TM-Specific User Menu............................................ 26
+3.11 Defining Schedule T ypes....................................................... 27
+4 Setting Up Dangerous Goods.................................................. 30
+4.1 Defining Common Settings for Dangerous Goods Processing............................. 30
+4.2 Configuring EH&S Basic Services................................................. 31
+4.3 Specifying Validity Area Categories................................................ 31
+4.4 Specifying Validity Areas....................................................... 32
+4.5 Specifying Dangerous Goods Regulations........................................... 34
+4.6 Specifying Dangerous Goods Classes.............................................. 34
+4.7 Specifying Settings for Mixed Loading Checks........................................ 35
+Defining Segregation Keys................................................... 35
+Defining Responses........................................................ 36
+Specifying Segregation Rules for Segregation Keys.................................. 37
+2 P U B L I C
+Basic Settings for SAP T ransportation Management
+Content
+Defining Agreement Deactivation Reasons........................................ 37
+5 Configuring Basic Settings for Charge Calculations................................. 39
+5.1 Defining Category Codes....................................................... 39
+5.2 Defining Subcategory Codes.................................................... 40
+5.3 Defining Charge T ype Codes..................................................... 41
+6 Configuring Settings for ERP Order Integration.................................... 45
+6.1 Defining Conditions for OTR T ype Determination...................................... 45
+6.2 Defining T ext Schemas........................................................ 48
+6.3 Defining T ext T ypes........................................................... 49
+7 Configuring Settings for ERP Shipment Integration................................. 50
+7 .1 Configuring Inbound Integration of ERP Shipments.................................... 50
+Defining Number Ranges for Inbound Integration................................... 51
+Defining Freight Order T ypes for Inbound Integration................................. 52
+Assigning Freight Order T ypes to ERP Shipment T ypes............................... 55
+Maintaining Output Management Adapter Settings.................................. 56
+7 .2 Configuring Outbound Integration of ERP Shipments................................... 57
+Defining Number Ranges for Outbound Integration.................................. 57
+Defining Freight Order T ypes for Outbound Integration............................... 58
+7 .3 Configuring Delivery Split/Update Processing........................................ 62
+Defining Delivery Split/Update T ypes............................................ 62
+Adjusting Delivery-Based T ransportation Requirements.............................. 63
+7 .4 Configuring Settings for Plant Maintenance (PM) Integration............................. 63
+8 Setting Up SAPconnect E-Mail................................................. 65
+Basic Settings for SAP T ransportation Management
+Content P U B L I C 3
+Legal Disclaimer
+ Caution
+This document contains sample configuration content. Unless expressly stated otherwise in your
+agreements with SAP , this sample content is not part of SAP product documentation and you may not infer
+any product documentation claims against SAP based on this information.
+4 P U B L I C
+Basic Settings for SAP T ransportation Management
+Legal Disclaimer
+1 Basic Settings for SAP Transportation
+Management
+Use
+This guide provides information about the settings that you must configure in SAP T ransportation Management
+(SAP TM) to enable integration with SAP ERP .
+Change History
+Version Date Description
+1.0 December 2010 Initial version
+1.1 April 2011 Harmonized configuration and master
+data; scenarios based on IDES
+1.2 November 2011 ● Updates to:
+○ Defining Subcategory Codes
+[page 40]
+○ Defining Charge T ype Codes
+[page 41]
+● Added sections:
+○ Defining Schedule T ypes
+[page 27]
+○ Defining Stage T ype Sequence
+for Movement T ypes [page
+25]
+○ Displaying SAP TM-Specific
+User Menu [page 26]
+○ Configuring Inbound Integra­
+tion of Shipments [page 50]
+2.0 September 2012 Update for SAP TM 9.0
+Basic Settings for SAP T ransportation Management
+Basic Settings for SAP Transportation Management P U B L I C 5
+Version Date Description
+2.1 March 2013 Update for SAP TM 9.0, SP04
+Updates to:
+● Defining Schedule T ypes
+● Defining Conditions for OTR T ype
+Determination
+● Defining T ext Schemas
+Added sections:
+● Defining Resolution Strategy
+● Defining T ransportation Service
+Level Codes
+● Scenario-Independent Functional­
+ity
+● Defining Number Ranges for In­
+bound Integration
+● Defining Freight Order T ypes for In­
+bound Integration
+● Assigning Freight Order T ypes to
+ERP Shipment T ypes
+● Maintaining Output Management
+Adapter Settings
+● Defining Number Ranges for Out­
+bound Integration
+● Defining Freight Order T ypes for
+Outbound Integration
+● Configuring Delivery Split/Update
+Processing
+● Defining Delivery Split/Update
+T ypes
+● Adjusting Delivery-Based T rans­
+portation Requirements
+Removed sections (as it is already part
+of delivered Customizing):
+● Defining Equipment Groups and
+T ypes
+● Defining Default Freight Document
+T ypes for Stages
+6 P U B L I C
+Basic Settings for SAP T ransportation Management
+Basic Settings for SAP Transportation Management
+Version Date Description
+2.2 June 2013 Update for SAP TM 9.0, SP05
+Updates to:
+● Creating Active Versions and Mod­
+els
+● Defining Stage T ype Sequence for
+Movement T ypes
+● Defining Schedule T ypes
+● Defining Charge T ype Codes
+3.0 June 2014 Update for SAP TM 9.1
+A
+```
+
+</details>
+
+
+## SAP Global Trade Services Integration Guide:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1Ft6O7FLajJ1qiikg_2IMbkTxo5iztzBr.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=1de9c5536a51204be10000000a17… 1/6
+Integration
+Generated on: 2021-01-20 03:57:06 GMT+0000
+SAP ERP | 6.0 EHP8 SP15
+PUBLIC
+Original content: https://help.sap.com/viewer/dbc6182f068b46b7aﬀ92e8a28d9b5d0/6.18.15/en-US
+Warning
+This document has been generated from the SAP Help Portal and is an incomplete version of the oﬃcial SAP product
+documentation. The information included in custom documentation may not reect the arrangement of topics in the SAP Help
+Portal, and may be missing important aspects and/or correlations to other topics. For this reason, it is not for productive use.
+For more information, please visit the https://help.sap.com/viewer/disclaimer.
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=1de9c5536a51204be10000000a17… 2/6
+Integration with SAP Global Trade Services
+Purpose
+SAP Global Trade Services (SAP GTS) supports enterprises in managing foreign trade activities, in adhering to trade laws, and in
+optimizing global trade.
+The integration of SAP GTS with Contract Accounts Receivable and Payable (FI-CA) enables you to comply with legal regulations
+by using sanctioned party list screening in handling your payment transactions. A sanctioned party list is a list of persons and
+companies, with whom you are not permitted by law to trade. Sanctioned party lists are published by government agencies and
+legal authorities and you can obtain them from data providers. Sanctioned party lists are legally binding for all those participating
+in trade. The integration of GTS and FI-CA makes it possible for you to automatically compare your business partner addresses
+with each relevant sanctioned party list. The results of this comparison are used in the payment program in Contract Accounts
+Receivable and Payable.
+Prerequisites
+You can obtain sanctioned party lists from data providers and import them to the relevant system using the XML interface. You can
+also create your own lists and use them for the check. To do this you have to create internal sanctioned party lists in SAP GTS.
+You dene which lists are used for the check in SAP GTS in Customizing. In addition, you create legal regulations in SAP GTS. Each
+legal regulation determines which sanctioned party lists are relevant for it.
+You make the system settings in Customizing under Materials Management  Purchasing  Foreign Trade/Customs  SAP Global
+Trade Services .
+For more information about S AP Global Trade Services , see the SAP Help Portal at http://help.sap.com  Analytics  Governance,
+Risk, and Compliance (GRC)  SAP Global Trade Services  Application Help  Compliance Management  Sanctioned Party List
+Screening
+Process Flow
+Sanctioned party list screening ensures that you can prevent transactions with the persons and companies listed.
+You can implement the SAP GTS component in one of the following ways:
+In the same system as Contract Accounts Receivable and Payable, in the same client or diﬀerent clients
+In a separate system
+Note
+If you choose to use SAP GTS in the same client, you are restricted to using the scenario described here.
+All other processes, such as checking logistics documents, are not possible in that case.
+If you run SAP GTS and Contract Accounts Receivable and Payable in diﬀerent clients or systems, the business partner data is
+replicated to SAP GTS by means of an ALE scenario. You also have to congure the ALE standard scenario for master data
+distribution and check it periodically. The rst time you use SAP GTS, you have to carry out a legacy data transfer. This means that
+you have to transmit all business partners to SAP GTS and check them there. You also communicate new business partners or
+changes to business partners using this scenario. For more information, see SAP Note 831743.
+The business partners created in SAP GTS receive the status Not Checked . The comparison with the sanctioned party lists takes
+place through a comparison of the addresses. Depending on the result of the check, a business partner receives the status Locked
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=1de9c5536a51204be10000000a17… 3/6
+or Released .
+SAP customers and vendors that you access, for example, from Financial Accounting (FI), are always transferred to SAP GTS and
+created there separately as SAP business partners with a GTS role. SAP GTS saves some additional data for each business partner
+with this role.
+Contract Accounts Receivable and Payable supports the following checks:
+Comparison of business partner master data, including account holder, with sanctioned party lists
+Evaluation of the results of the check in the payment program
+Check in the payment program as to whether the country of the payee or payer is subject to an embargo
+Check of the note to payee by SAP GTS in the payment program
+For both incoming and outgoing payments, the payment program determines whether a business partner is included in a
+sanctioned party list and therefore whether payment is to be prevented.
+Each business partner can have one or more sets of bank details. Each of these sets of bank details can have an account holder.
+SAP GTS also compares this account holder with the sanctioned party lists and, if necessary, the payment program prevents
+payment transactions.
+The banks (in particular, all correspondence banks in the USA) check the text of the note to payee in the payment media and react
+accordingly depending on the result of the check (for example, by locking a payment).
+You can also use an event in Contract Accounts Receivable and Payable to compare the text in the text eld with the sanctioned
+party lists. To do this, use the sample module FKK_BLACKLIST_0655 to dene your own function module and dene it for event
+0655 in Customizing for Contract Accounts Receivable and Payable under Program Enhancements  Dene Customer-Specic
+Function Modules .
+To enable the payment program to have swift access to current check data, run the Get Locked Partners and Countries report,
+which determines the locked data from SAP GTS, at periodic intervals. You can access the report in the menu for Contract
+Accounts Receivable and Payable under Periodic Processing  Transfer Data .
+The transaction for transferring data for the critical business partners and embargo countries is under Periodic
+Processing  Transfer Data  Sanctioned Party Lists .
+To access the GTS area menu in the SAP GTS system, enter transaction /SAPSLL/MENU_LEGAL in the command eld.
+Using SAP GTS in Contract Accounts Receivable and Payable in One Client
+Use
+You use Contract Accounts Receivable and Payable and SAP Global Trade Services (SAP GTS) in one system and in the same
+client.
+Activities
+If Contract Accounts Receivable and Payable and SAP GTS run in the same client:
+SAP GTS must receive information about which business partners are relevant for the check
+The system must display the check data for the relevant business partners
+To realize this, proceed as follows:
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=1de9c5536a51204be10000000a17… 4/6
+1. Dene role type MKK in the system settings for SAP GTS.
+If SAP GTS is active, you can dene role types relevant for the check. Add the role type MKKin the Implementation Guide
+for SAP Global Trade Services under SAP Compliance Management  Service ʻSanctioned Party List
+Screening’  Activation  Activate Business Partner at Level of Business Partner Roles. Enter BUPAas application object,
+MKKfor the partner function, Process Not Terminated, Service Sets Lock for the type of SPL lock, and SPL Check
+Asynchronous as event.For more information, see SAP Note 831743.
+2. Add the tab page for SAP GTS in the Business Data Toolset (BDT).
+To make the tab page visible in the transactions for processing and displaying business partners, proceed as follows in the
+area menu BUPT :
+a. Choose B
+```
+
+</details>
+
+
+## SAP External Billing Systems Integration Guide:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-integration/1iU3eWK02xZ8zTZUiO-PPaiP-NT7nxRyy.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be10000000a17… 1/6
+Integration
+Generated on: 2021-01-20 04:00:17 GMT+0000
+SAP ERP | 6.0 EHP8 SP15
+PUBLIC
+Original content: https://help.sap.com/viewer/dbc6182f068b46b7aﬀ92e8a28d9b5d0/6.18.15/en-US
+Warning
+This document has been generated from the SAP Help Portal and is an incomplete version of the oﬃcial SAP product
+documentation. The information included in custom documentation may not reect the arrangement of topics in the SAP Help
+Portal, and may be missing important aspects and/or correlations to other topics. For this reason, it is not for productive use.
+For more information, please visit the https://help.sap.com/viewer/disclaimer.
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be10000000a17… 2/6
+Integrating External Billing Systems
+Purpose
+For exchanging data between Contract Accounts Receivable and Payable (FI-CA) and an external (billing) system, in SAP
+Exchange Infrastructure (XI), SAP provides various diﬀerent message interfaces.
+Notes on Implementation
+Make sure that the process integration content of the software component FI-CA has been imported to your integration
+repository. The process integration content for Contract Accounts Receivable and Payable is on SAP Service Marketplace. Here
+the content is displayed as a patch under the respective industry solution (for example, SAP IS-T).
+Features
+You congure the link between the message interfaces of the software component FI-CA and external systems in the Integration
+Directory of your Integration Server (see Basics ).
+For more information about the interfaces and their use, see the following section. You can use the following message interfaces in
+Contract Accounts Receivable and Payable for the connection to external (billing) systems:
+Interface of SAP Exchange Infrastructure Description
+FICAExterningBillingNotification_In Document transfer with revenue item
+OpenItemAccountingSummaryNotification_Out Outbound interface of business partner information
+BillImageRequest_Out External archive connection
+The process integration content under the software component FI-CA still contains the IDocs ContracDocument_Create
+and ContracDocument_Reverse and the BAPI BAPI_CTRADOCUMENT_GETLIST as imported objects.
+Message Interface for Document Transfer
+Denition
+Invoices are transferred in the scope of SAP Exchange Infrastructure and using an asynchronous message.
+Structure
+Transferring documents using SAP Exchange Infrastructure
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be10000000a17… 3/6
+You need to link the interface FICAExternalBillingNotification_In (FI-CA) with a customer-specic interface
+(outbound) of the billing system. To avoid mapping (in order to improve performance), you should reuse the message data type
+FICAExternalBillingNotification again in the customer-specic interface.
+Conguring Document Transfer
+Use
+Document transfer with revenue item is based on the interface technology of SAP Exchange Infrastructure and on IDoc
+interfaces.
+Procedure
+To transfer invoices, credit memos, write-oﬀs, or down payment requests using message interfaces and IDoc interfaces, you have
+to make the following settings:
+1. Dene Partner Agreements and Port
+A message is not transferred directly to the system; instead, it is stored rst in an IDoc and then transferred to the system.
+To process an IDoc, you must rst dene a port and a partner agreement.
+There are no interface-relevant restrictions or notes for the port description (transaction WE21). You can use the port type
+File, for example. For this port type, the system stores the IDocs in les. You start processing using a synchronous RFC.
+For the denition of the partner agreement (transaction WE20), make sure that the partner type is a logical system. The
+partner number in the control records of the IDocs created by the external billing system must be the same as the partner
+number in the partner agreement. If the partner numbers are not identical, the system cannot process the IDocs since the
+ERP system cannot recognize the partner. Since, from the point of view of the ERP system, the IDocs are inbound IDocs,
+you have to enter the relevant message type in the inbound parameters and congure it according to the following table:
+Interface Message Type Process Code Settings
+Document transfer FKK_EBS_DOC FKK_EBS_DOC Syntax check
+Triggered by
+background program
+1. Dene Identication for External System
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be10000000a17… 4/6
+To enable communication with an external billing system, you rst have to dene an ID for the external system in
+Customizing for Contract Accounts Receivable and Payable. Choose Data Transfer  Communication with External Billing
+Systems and enter the ID.
+2. Maintain Basic Settings
+So that a message for later posting can be transferred correctly in an IDoc, you have to make basic settings in Customizing
+for Contract Accounts Receivable and Payable. Choose Data Transfer  Communication with External Billing
+Systems  Transfer of Accounting Documents  Basic Settings for Document Transfer. .
+If the standard functions do not meet your requirements, in addition to the Customizing settings, you can use the following
+events to make customer-specic implementations:
+2401 Posting via IDoc: Determine Reconciliation Key
+2404 Posting via IDoc: Customer Header Segment Processing
+2418 Posting via IDOC: Account Assignment of Revenue Items
+2419 Posting using IDoc with Revenue Item: BPITEM Segment Processing
+2420 Posting using IDoc with Revenue Item: Determine Object Relationships
+2421 Posting using IDoc with Revenue Item: GLITEM Segment Processing
+2422 Posting using IDoc with Revenue Item: TAXITEM Segment Processing
+2423 Posting via IDOC: Addition of COPA Data
+2424 Posting with IDoc with Revenue Item: Account Assignment of Business Partner Item
+2425 Posting with IDoc with Revenue Item: XI Message Enhancement
+Message Interface for Outbound Interface
+Denition
+The liability update is made possible by an asynchronous message interface.
+Structure
+Message Interface for Outbound Interface for Business Partner Information
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be10000000a17… 5/6
+You have to connect the interface OpenItemAccountingSummaryNotification_Out (FI-CA) with a customer-specic
+interface (inbound) of the billing system. To avoid mapping (in order to improve performance), the message data type
+OpenItemAccountingSummaryNotification should be reused in the customer-specic interface.
+In Customizing you can activate the transfer of business partner data to the outbound interface per company code and receiver
+system for open items, cleared items, and payments.
+With a customer-specic implementation of the following events, if the functions described here do not meet your requirements,
+you can inuence the transfer of data to external systems:
+3800 Outbound Interface: Filter and Receiver Determination
+3806 Outbound Interface: Interface Call (Message Interface)
+3808 Outbound Interface: Supplement Interface
+3810 Outbound Interface: Selection Specications for Open Items
+3820 Outbound Interface: Determination of External Contract Number
+3830 Outbound Interface: Filter Information (Transfer)
+For more information, see Outbound Interface for Postings to Business Partner under Interfaces in Contract Accounts Receivable
+and Payable .
+Message Interface for Invoice Archive
+Use
+The query of data from the invoice archive is realized by a synchronous message interface.
+Structure
+Message interface for external archive connection of invoices
+1/20/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23142951&topics=7ae9c5536a51204be1000
+```
+
+</details>
+
+
+## SAP CLM-CPQ Integration Guide:
+
+### Contract Lifecycle Management - Salesforce CRM, Adobesign, Docusign Integration ...
+
+<iframe src="https://drive.google.com/file/d/1GATWaJwjTXlCfnnGC11Huk9Jb5LNaf-F/preview" width="640" height="480" />

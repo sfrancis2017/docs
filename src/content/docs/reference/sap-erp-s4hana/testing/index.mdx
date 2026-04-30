@@ -1,0 +1,244 @@
+---
+title: "Documents related to Software Testing"
+description: "Commands:"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+DOCS FOR Testing
+
+```
+
+Commands:
+
+```
+STLC - Software Testing ...
+
+```
+
+### HPALM - Process Document
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-testing/1lir_IfXWPxJgJFgpVRJVjzaSlo1hqDyS.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+HPALM
+Process document
+Sajiv Francis
+July 2020
+Table of Contents
+Dashboard and Analysis View: ..................................................................................................................... 3
+Management Tab .......................................................................................................................................... 4
+Requirements Tab ......................................................................................................................................... 5
+Requirements continued…. ...................................................................................................................... 6
+Testing tab ..................................................................................................................................................... 7
+Defect Management: .................................................................................................................................... 9
+Dashboard and Analysis View:
+It has an analysis view and a dashboard view that helps you track requirements, test executions and
+unresolved defects in a single view.
+Management Tab
+In this view, business analysts/scrum masters track releases, builds, cycles (Sprint/Agile – weekly or
+biweekly or monthly).
+- Set up a release for development of your project.
+- Include all necessary files/releases in the library (for tracking).
+- You can also maintain repositories and build requirements to be tracked within the
+management tab. Cycles are maintained for each release. (for e.g. 5 month release of SAP
+OTC can have 5 different cycles with different requirements to be completed within the
+given timeline.)
+Requirements Tab
+We build releases and cycle requirements for a business process in relation to the system/software
+being built. In requirements section, you write user stories/use cases (functional or nonfunctional
+requirements) and you match that with the release along with the specific cycle. Business models can
+also be built to define use cases within a business process ( in relation to the software/system being
+built).
+Requirements continued….
+Testing tab
+There are 2 main components that need to be fulfilled in this section, namely writing test cases and
+executing test cases. There are 3 main headers in this section, namely, test resources, test plans and test
+lab (you execute your tests within the test lab).
+Under Test Plan, you write your test plan description, steps to be undertaken, test plan should be
+matched with its requirements.
+Select Test plan and import it into the Test Lab (This process involves selecting your test plan (cases) into
+your test lab and executing the test cases. Run the test and assign (passed, failed, blocked etc.). When a
+test case on a step is failed to run, you can either carry on and test other steps if it is possible or log a
+defect within the process, report it as a defect.
+Once there is a failure in execution of a test case, you report it as a defect (defect management).
+After logging in the defect, report the defect number along with all the required screenshots and other
+test artifacts in support of failure in processing your test plan.
+Defect Management:
+```
+
+</details>
+
+### HPALM - Reporting
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-testing/14XLfxTec6eMKzpLHPcaLYQWFRw3lGZdj.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Dashboard, Reports & Analysis in HP ALM
+(Quality Center)
+• ALM allows users to generate reports and graphs at any time during the software development
+process.
+• Project reports in ALM enable users to design
+and generate customized report by accessing the
+project information which will help stakeholders in
+taking informed decisions.
+• User can create graphs or project reports in
+the Analysis View module. They can also save the
+graphs and reports in the Analysis View module for
+future references.
+Analysis View
+Business View Graph
+Quick Entity Graphs
+Generation
+Generating Excel Report
+Generating Project Report
+Dashboard
+Analysis View
+Analysis view module enables users to create, manage and view analysis items such as graphs,
+project reports and Excel reports.
+Entity Graph: ALM enables users to generate graphs based on certain entity type such as
+requirements, tests, test instances, test runs or defects. For each entity, different graph types are
+available that are listed below.
+Most commonly used graphs are
+• Requirement Coverage Graph
+• Requirement Summary Graph
+• Test Set Summary Graph
+• Defect Progress Graph
+• Defect Summary Graph
+• Defect Age Graph.
+Now, Let us generate an Entity Graph based on 'Defect Summary' criteria.
+ENTITY GRAPH:
+Step 1) Navigate to 'Dashboard' Tab.
+1. Select Analysis View
+2. Click 'New'.
+3. Select 'Graph Wizard'
+Step 2) Let us generate 'Entity Graph'. We can also generate a Business View Graph and click 'Next>'.
+Step 3) The "Select Entity Type" Dialog is displayed to the user.
+1. Select the entity for which the Graph has to be displayed
+2. Select the Graph type.
+3. Click 'Next'.
+Step 4) The Wizard also allows you to choose projects. The user has capabilities to add the same
+graph configuration across projects.
+Step 5) The Wizard also allows you to enter a filter criterion. If there is NO Filter applied, the graph is
+generated by considering all the data available in Defects module.
+Note: Filter can be applied against a specific release/cycle. If NO Filter is set, the graph wizard
+picks up all the defects that are posted till date into consideration.
+Step 6) The Wizard allows user to choose X-Axis and Group by a certain field and click 'Finish'.
+Step 7) The graph is generated as per the criteria set by the user in Graph wizard. We can 'Add it to
+the Analysis Tree' so that we can just refresh the chart to get the current status.
+Step 8) Upon clicking on 'Add to Analysis Tree' the save dialog opens up.
+1. Enter the Name of the Graph
+2. Select the folder where user would like to save the Graph
+1. Private – The Graph is saved against the current user profile. Others won't have
+access to the same
+2. Public – The generated Graph would be visible to ALL the project users.
+3. Click 'Save'.
+Step 9) The graph would be added to the Analysis tree as shown below.
+Business View Graph
+A business view graph involves only those project entity fields that represent information which is
+useful from a business perspective.
+Business views can either be based on single entities such as Requirement or Defects, or it can be
+based on more complex relationships between entities such as Defects with Linked
+Requirements/defects with linked tests.
+Though on a high level, both business view graph and entity graph look at the same, at this juncture
+let us understand basic different between entity graph and business view graph.
+Entity Graph Business View Graph
+This graph is strictly associated with only one
+type of entity (defect or Requirement or Test)
+in ALM
+This Graph is either based on single entity or based on
+relationship between Defect and Requirement or defect
+and tests
+The fields involved are those that are
+contained within that specific entity.
+The fields involved are those that represent useful
+information from a business perspective.
+Step 1) Click '+' and Select 'Graph Wizard'.
+Step 2) Select Business View Graph and click 'Next>'
+Step 3) Select Defects from the Filter criteria and click 'Next>'.
+Step 4) Use the current project data to generate the graph and click 'Next>' to continue.
+Step 5) Let us filter based on Severity and click 'Next>'
+Step 6) Enter the criteria for 'X-Axis' and Grouped By fields and Click 'Finish'
+Step 7) The Graph is Generated based on the Criteria selected. Click on 'Add to Analysis Tree'.
+Step 8) The save dialog appears for users to save the generated graph.
+1. Enter the Name of the Graph
+2. Select 'Private' or 'Public'
+3. Click 'Save'.
+Step 9) The created graph is saved in Analysis Tree as shown below.
+Quick Entity Graphs Generation
+Step 1) The Entity Graph can also be generated without going through the Graph Wizard. A Quick
+Graph can be generated by clicking on 'New Graph' by clicking on '+' icon.
+Step 2) The New Graph dialog is displayed.
+• Select the Entity
+• Graph Type
+• Graph Name
+• Click 'OK'.
+Step 3) The Created Graph enables users to make changes to the Configuration based on their
+requirements. We have selected defect Count on Y Axis and Grouped based on 'Status'.
+Step 4) Click 'View' Tab to generate the Graph for the specified criteria.
+Generating Excel Report
+• Testers can also generate Excel reports based on business views which reflect only those
+project entity fields that is useful from a business perspective.
+• The reports are created and configured with in Microsoft Excel and then uploaded to the
+Analysis View module.
+Step 1) Click 'Add New' Button and select 'New Business View Excel Report'.
+Step 2) Enter the report name and click 'OK'.
+Step 3) Click 'Install Addin'.
+Step 4) The Installation Status is displayed to the user as shown below.
+Step 5) Open MS Excel and one would find a new T ab by name 'HP ALM'. Select 'HP-ALM' and click
+'Login'
+Step 6) ALM Login Dialog opens up.
+1. Enter Login Name.
+2. Enter Password.
+3. Click 'Authenticate'.
+4. Select the Domain.
+5. Select the Project.
+6. Click 'Login'.
+Step 7) Now,
+1. Click 'Add' Button.
+2. Add Worksheet Dialog Opens up. Select 'Defects' as we want to generate 'High' / 'Very High'
+and 'Critical' defects report.
+3. Click 'OK'
+Step 8) The Excel report is generated with all the defects list and user can configure the same.
+1. Click 'Filter' Tab from Worksheet configuration.
+2. Click 'Severity' Field.
+Step 9) The 'Select Filter Condition' dialog opens up.
+1. Select the Filter condition
+2. Click 'OK'
+Step 10) Now we need to save the same against the excel report that we have created.
+Click 'HP ALM' tab and click 'Save to ALM'.
+Step 11) The 'Save Business View Excel Report' Dialog Opens up.
+1. Enter the Report Name
+2. Select the same report that we created in Step 2.
+3. Click 'Save'.
+Step 12) Confirm Save Dialog box opens up. Click 'Yes' to Continue. This dialog pops up as user is
+trying to overwrite with the one that is already2 created.
+Note: The ALM asks for overwriting the existing excel report as we have selected the same report
+name that we have created in Step 2. In Step 2 the report was NOT configured and loaded but it was
+just a placeholder for the report. Only after performing this step the excel report is available for the
+user to generate and save in excel format.
+Step 13) Now user can generate the report from ALM. Click 'Generate'.
+Step 14) Now report displays based on the criteria set by the user.
+Note: User can get the updated report by regenerating the excel report, if there is an addition or
+deletion of defects or if there is a change in the severity of the defect.
+Generating Project Report
+Project reports enable users to design and generate detailed reports containing information for
+a specific project.
+• Users can also define sections and sub-sections each listing records of a specified ALM entity.
+• Users can customize the layout and the template format for each section.
+• The Project report can be generated as HTML, Microsoft Word, or PDF formats.
+Step 1) T o Create a new project report, click '+' icon from Analysis Module and select 'New Project
+Report'.
+Step 2) The new project Report Dialog box opens. Enter the Name of the Project and
+```
+
+</details>

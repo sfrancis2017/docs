@@ -1,0 +1,137 @@
+---
+title: "Central Finance - CFIN"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+Getting Started with Central Finance - User Assistance by SAP
+
+```
+## Important Notes
+
+<a href="https://launchpad.support.sap.com/#/notes/2148893"><img alt="npm" src="https://img.shields.io/badge/SAP%20Note-2148893-blue" /></a>
+
+<a href="https://launchpad.support.sap.com/#/notes/2184567"><img alt="npm" src="https://img.shields.io/badge/SAP%20Note-2184567-blue" /></a>
+
+## Configuration Guide
+
+<PDFEmbed src="/pdf/sap-central-finance-user-assistance/1Tn5x6t1NbQ0FZVAMbv-rL3vfAnrVWMmb.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+PUBLIC
+Document Version: SAP S/4HANA 2020 – 2020-09-07
+Central Finance© 2020 SAP SE or an SAP affiliate company. All rights reserved.
+THE BEST RUN
+Content
+1 Central Finance............................................................. 4
+1.1 Replication Scenarios in Central Finance............................................. 6
+1.2 Central Processes............................................................. 7
+1.3 System Landscape............................................................ 8
+1.4 Postings Excluded from T ransfer.................................................. 11
+1.5 Configuring Y our Central Finance Scenario.......................................... 12
+Getting Started with Central Finance............................................ 12
+Installing Central Finance.................................................... 20
+Configuration in Central Finance System: Set Up Systems............................. 27
+Error Handling............................................................ 29
+Data Mapping............................................................ 37
+Configuration Consistency Check.............................................. 56
+EC-PCA Postings.......................................................... 65
+Material Cost Estimates Replication............................................. 72
+Activity Rates ............................................................ 74
+Cost of Goods Sold Splitting in Central Finance.................................... 80
+Price Difference Splitting in Central Finance....................................... 82
+Account Determination of Condition T ypes for Profitability Analysis (CO-PA)................ 84
+Replication of Commitments................................................. 85
+Configuration in SAP Landscape T ransformation Replication Server...................... 86
+Initial Load.............................................................. 92
+Replicate Individual Cost Objects and CO Documents............................... 126
+Delete Replicated Documents................................................ 127
+Comparison Reports....................................................... 131
+Activation of Clearing T ransfer and Handling of Open Items........................... 136
+Special Business T ransactions: Additional Information............................... 143
+Additional Settings and Enhancements......................................... 144
+Display Information from Central Finance in the Source Systems....................... 145
+Accounting View of Logistics Information (AVL): Overview............................ 155
+1.6 Central Payment............................................................ 161
+Settings for Central Payment in Source Systems................................... 164
+Activation of Central Payment for Company Codes................................. 165
+Handling of Historical Open Items............................................. 166
+Guidance for Dependent Processes............................................ 167
+Cross-System Process Control for Central Payment................................ 180
+Down Payment Integration with SD............................................ 187
+2 PUBLIC
+Central Finance
+Content
+Down Payment Integration with MM............................................ 191
+SEPA Mandate Replication.................................................. 193
+1.7 Central Budgeting for Internal Orders............................................. 200
+1.8 Central T ax Reporting........................................................ 202
+Central T ax Reporting: Prerequisites........................................... 203
+Configuration Consistency Checks............................................ 204
+T ax Reporting Based on Postings from the Initial Load............................... 206
+Overview of Supported Reports............................................... 206
+Deferred T axes.......................................................... 208
+Withholding T axes........................................................ 213
+External T ax Calculation.................................................... 216
+Input T ax from Parked Documents............................................. 216
+Support of T ax Reports in Mode “Update of Documents”............................. 216
+1.9 Central Projects (WBS) - Reporting Scenario........................................ 217
+Central Projects (WBS) - Reporting Scenario: Configuration in Source System.............. 219
+Central Projects (WBS) - Reporting Scenario: Configuration for SAP AIF.................. 221
+Central Projects (WBS) - Reporting Scenario: Configuration in the Central Finance System
+...................................................................... 221
+Central Projects (WBS) - Reporting Scenario: Check Settings for Replication of Projects....... 224
+1.10 Third-Party System Interfaces to Central Finance..................................... 225
+Setting Up the Third-Party System Interfaces..................................... 225
+Interface: Posting Data..................................................... 234
+Interface: Changing Data................................................... 243
+1.11 Advanced Compliance Reporting: Country/Region-Specific Reports in Central Finance.......... 245
+1.12 Read Access Logging Configurations in Central Finance................................ 263
+Central Finance
+Content PUBLIC 3
+1 Central Finance
+With Central Finance, you can transition to a centralized SAP S/4HANA on-premise edition without disruption
+to your current system landscape, which can be made up of a combination of SAP systems of different releases
+and accounting approaches and non-SAP systems.
+This allows you to establish a Central Reporting Platform for FI/CO with the option of creating a common
+reporting structure. Additionally, selected financial processes can be executed centrally in this system. T o
+prepare common reporting structures, you can map the different accounting entities (for example, account,
+profit center, or cost center) in your source systems to one common set of master data in the Central Finance
+system. Y ou can then replicate financial accounting and management accounting postings to your Central
+Finance system.
+In your SAP S/4HANA system, FI documents and CO postings are combined into one document; the universal
+journal entry. In addition, all cost elements are part of the chart of accounts. Before you replicate CO postings
+to the Central Finance system, you need to make sure that accounts are available for all cost elements. Y ou can
+also replicate certain cost objects (for example, internal orders) to the Central Finance system.
+In a typical set-up, multiple source systems are connected to one System Landscape T ransformation
+Replication Server which in turn is connected to one Central Finance system.
+4 PUBLIC
+Central Finance
+Central Finance
+Where can I find more information?
+● https:/ /help.sap.com/doc/b870b6ebcd2e4b5890f16f4b06827064/2020.000/en-US/
+WN_OP2020_EN.pdf [https:/ /help.sap.com/doc/b870b6ebcd2e4b5890f16f4b06827064/2020.000/en-
+US/WN_OP2020_EN.pdf]
+● https:/ /help.sap.com/doc/e2048712f0ab45e791e6d15ba5e20c68/2020/en-US/
+FSD_OP2020_latest.pdf [https:/ /help.sap.com/doc/e2048712f0ab45e791e6d15ba5e20c68/2020/en-
+US/FSD_OP2020_latest.pdf]
+● Replication Scenarios in Central Finance [page 6]
+● Getting Started with Central Finance [page 12]
+● Central T ax Reporting [page 202]
+● Central Payment [page 161]
+● Third-Party System Interfaces to Central Finance [page 225]
+● Central Projects (WBS) - Reporting Scenario [page 217]
+\ Note
+T erminology: Journal Entry vs. Accounting Document
+Please note that the following information applies only to English.
+In SAP S/4HANA, the term journal entry replaced accounting document following a change in the
+underlying financial architecture. While the basic concept – the accounting record for a business
+transaction – is the same, journal entries enable a true integrated accounting
+```
+
+</details>

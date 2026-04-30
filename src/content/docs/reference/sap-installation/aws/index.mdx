@@ -1,0 +1,136 @@
+---
+title: "S4HANA ON AWS"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+## Installation Video:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/ml00w4jFo78" frameborder="0" allowfullscreen />
+
+## Installation Guide:
+
+<PDFEmbed src="/pdf/sap-installation-aws/1PLjKEqUL-Vr2VNWXwUyTZBp8r-Vniuhq.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Page 1 of 37
+SAP S/4HANA on the AWS Cloud
+Quick Start Reference Deployment
+September 2019
+Kuang-Shih Howard Lee, Guilherme Felix, Patrick Leung, Shivansh Singh
+Amazon Web Services
+Visit our GitHub repository for source files and to post feedback,
+report bugs, or submit feature ideas for this Quick Start.
+Contents
+Overview .................................................................................................................................... 2
+SAP S/4HANA on AWS ......................................................................................................... 2
+Cost and licenses .................................................................................................................... 3
+Architecture ............................................................................................................................... 4
+Planning the deployment .......................................................................................................... 6
+Specialized knowledge ........................................................................................................... 6
+AWS account .......................................................................................................................... 6
+Technical requirements ......................................................................................................... 7
+Deployment options ...............................................................................................................8
+Deployment steps .................................................................................................................... 10
+Step 1. Sign in to your AWS account .................................................................................... 10
+Step 2. Download SAP S/4HANA software (Optional) ....................................................... 10
+Step 3. Launch the Quick Start ............................................................................................ 15
+Option 1: Parameters for deploying S/4HANA into a new VPC ...................................... 16
+Option 2: Parameters for deploying S/4HANA into an existing VPC ............................. 22
+Step 4. Test the deployment ................................................................................................ 27
+Changing the Security Group Configuration ................................................................... 28
+Amazon Web Services – SAP S/4HANA on the AWS Cloud September 2019
+Page 2 of 37
+SAP-Level access using SAP GUI .................................................................................... 28
+OS-Level access using SSH ............................................................................................... 29
+Security ................................................................................................................................... 30
+Network Security .................................................................................................................. 31
+Identity and Access Management (IAM) ............................................................................. 31
+OS Security ........................................................................................................................... 31
+Security Groups .................................................................................................................... 31
+FAQ .......................................................................................................................................... 32
+Send us feedback ..................................................................................................................... 35
+Additional resources ............................................................................................................... 35
+Document revisions ................................................................................................................. 36
+This Quick Start was created by Amazon Web Services (AWS).
+Quick Starts are automated reference deployments that use AWS CloudFormation
+templates to deploy key technologies on AWS, following AWS best practices.
+Overview
+This Quick Start reference deployment guide provides best practices and step-by-step
+instructions for deploying SAP S/4HANA on the AWS Cloud.
+This Quick Start is for SAP architects, system administrators, and IT technical professionals
+who are responsible for architecture design and the deployment of S/4HANA workloads on
+AWS.
+SAP S/4HANA on AWS
+This Quick Start offers two options:
+ To provision a new AWS Cloud infrastructure and all its resources using AWS
+CloudFormation, and a new S/4HANA system cluster that consists of a HANA database,
+an ABAP SAP Central Services (ASCS) server, a Primary Application Server (PAS), and
+optional Additional Application Server (AAS), with or without SAP software installed.
+Amazon Web Services – SAP S/4HANA on the AWS Cloud September 2019
+Page 3 of 37
+ To deploy a new S/4HANA cluster, with the same configuration as in the first option, in
+an existing AWS Cloud infrastructure.
+Please know that we may share who uses AWS Quick Starts with the AWS partner that
+collaborated with AWS on the content of the Quick Start.
+Cost and licenses
+You are responsible for the cost of the AWS services used while running this Quick Start
+reference deployment. There is no additional cost for using the Quick Start.
+The AWS CloudFormation templates for this Quick Start includes configuration parameters
+that you can customize. Some of these settings, such as instance type, will affect the cost of
+deployment. For cost estimates, see the pricing pages for each AWS service you will be
+using. Prices are subject to change.
+Tip   After you deploy the Quick Start, we recommend that you enable the AWS Cost
+and Usage Report to track costs associated with the Quick Start. This report delivers
+billing metrics to an Amazon Simple Storage Service (Amazon S3) bucket in your
+account. It provides cost estimates based on usage throughout each month, and
+finalizes the data at the end of the month. For more information about the report,
+see the AWS documentation.
+This deployment uses a Bring Your Own License (BYOL) model for SAP software. You must
+already own licenses for SAP, and you must be authorized to download software from the
+SAP Software Download Center (SWDC).
+The Quick Start requires a subscription to the SUSE Linux Enterprise Server (SLES)
+Amazon Machine Image (AMI) for the S/4HANA instance. The Quick Start requires a
+subscription to the SLES for SAP or the Red Hat Enterprise Linux (RHEL) AMI for the
+HANA database. The AMIs are available from AWS Marketplace. Additional pricing, terms,
+and conditions may apply. For instructions, see step 2 in the deployment section.
+For the SAP S/4HANA deployment, this Quick Start launches the AMI for the supported
+versions of the SLES or RHEL operating system you choose. The AMI includes the license
+for the SLES and RHEL operating systems.
+For the SAP HANA database deployment, the Quick Start launches the AMI for the
+operating system you choose: SLES, SLES for SAP, or RHEL for SAP, RHEL for SAP with
+High Availability (HA) and Update Services (US). The license cost for the operating system
+Amazon Web Services – SAP S/4HANA on the AWS Cloud September 2019
+Page 4 of 37
+is included in the Amazon Elastic Compute Cloud (Amazon EC2) hourly price. There is an
+additional software cost for SLES for SAP AMIs.
+The following table summarizes the list of S/4HANA Quick Start–supported operating
+systems and versions.
+Operating system Supports Single-AZ
+deployment?
+Supports Multi-AZ
+deployment?
+ SLES 11 SP4
+ SLES 12
+ SLES 12 SP1
+ SLES 12 SP3
+ SLES 12 SP4
+ SLES 15
+Yes No
+ SLES 12 SP2 for SAP*
+ SLES 12 SP3 for SAP*
+Yes Yes
+ SLES 12 SP4 for SAP*
+ SLES 15 for SAP*
+Yes Yes
+ RHEL 7.5 for SAP HANA Yes No
+ RHEL 7.4 for SAP with HA and US
+ RHEL 7.5 for SAP with HA and US
+
+```
+
+</details>

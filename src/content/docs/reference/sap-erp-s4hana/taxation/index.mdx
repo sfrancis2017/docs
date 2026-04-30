@@ -1,0 +1,209 @@
+---
+title: "Documents related to Taxation"
+description: "Commands:"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+```
+DOCS related to Taxation
+
+```
+
+Commands:
+
+```
+Taxation, Cross-border  ...
+
+```
+
+## SAP Best Practices Tax Account Structure:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-taxation/1z-Da7rKDxshVaf2hyIqUK2AEpEMjDvIl.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=0402e01d86124d76af222862da5… 2/47
+21600000 - Reserve for Deferred Taxes
+G/L Account Number
+(I_SAKNR)
+21600000
+G/L Acct Long Text (SKAT) Reserve for Deferred Taxes
+G/L Account Group SAKO
+Balance/ P&L Account Balance
+Account Category Tax
+Account Purpose Account for reserve
+Account Hierarchy Level ASSETS | CURRENT ASSETS | ACCRUED INCOME | Tax accrual and deferral
+Used in Conguration or Master
+Data
+Where Used in the Global
+Account Determination or
+Master Data
+Account Usage In the documentation group for Accrued Income, the following accounts are described:
+G/L Account Number (I_SAKNR) G/L Acct Long Text (SKAT)
+12550000 Unbilled Revenue
+12561000 Prepaid Expenses
+21600000 Reserve for Deferred Taxes
+21730000 Freight Clearing Account (MM)
+21740000 Customs Duty Clearing Account
+(MM)
+A prepaid expense is a type of asset that arises on a balance sheet because of business making
+payments for goods and services to be received in the near future. While prepaid expenses are initially
+recorded as assets, their value is expensed over time as the benet is received onto the income
+statement, because unlike conventional expenses, the business will receive something of value soon.
+Process Related Information Prepaid Expenses is used for costs which are paid over a period of time and extends the nancial year.
+The prepaid expenses for the following nancial year are posted to this account.
+Unbilled Revenue is used for received revenue where no invoice is created yet and no revenue can be
+posted.
+Test script for J58
+Process step Enter Accrual/Deferral Journal Entry
+Posting Examples 1. Prepaid Expenses
+Debit Credit
+63004000 - Insurance 800 EUR 12561000 - Prepaid Expenses 800
+EUR
+In the new year, the expense is posted into the correct period:
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=0402e01d86124d76af222862da5… 3/47
+Debit Credit
+12561000 - Prepaid Expenses 800
+EUR
+63004000 - Insurance 800 EUR
+Accrual is posted:
+Debit Credit
+3333 Vendor (21100000 Payables Domestic)
+1200 EUR
+11001000 - Bank 1 - Bank (Main) Account 1200
+EUR
+Invoice is paid:
+Debit Credit
+63004000 - Insurance 1200 EUR 3333 Vendor (21100000 Payables
+Domestic) 1200 EUR
+Invoice is received and posted:
+An example of expensing prepaid expenses would be if a company had a one-year insurance
+policy at a cost of 1200 EUR in August. For each month, 100 EUR of prepaid insurance would be
+posted to the income statement. During the period-end, accrual or deferral booking might be
+necessary. These are entered in the last day of the period and the equivalent reversal is
+generated in the rst day of the following month.
+2. Unbilled Revenue
+The company receives the amount of 10000EUR but only 9100EUR is billed so far. The rest of
+729 EUR is posted to Unbilled Revenue and the Output Tax for this amount is posted.
+Debit Credit
+11001000 Bank1 Main Account 10000EUR 12100000 Receivables Domestic 9100
+EUR
+12550000 Unbilled Revenue 729 EUR
+22000000 Output tax (MWS) 171 EUR
+12541000 - Receivables from Tax Authorities (no recon acct)
+G/L Account Number
+(I_SAKNR)
+12541000
+G/L Acct Long Text (SKAT) Receivables from Tax Authorities (no recon acct)
+G/L Account Group SAKO
+Balance/ P&L Account Balance
+Account Category Asset/Liability - AR
+Account Purpose Tax receivables, relevant for open item reclassication, relevant for foreign currency revaluation
+Account Hierarchy Level ASSETS | CURRENT ASSETS | ASSETS FOR CURRENT TAXES | Assets for current taxes
+Used in Conguration or Master
+Data
+X
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=0402e01d86124d76af222862da5… 4/47
+Where Used in the Global
+Account Determination or
+Master Data
+Acct Determ. for Open Item Exch.Rate Diﬀerences / Account Determ.for Balance Sheet Transfer
+Postings
+Account Usage In the documentation group for Asset for current taxes, the following accounts are described:
+G/L Account Number (I_SAKNR) G/L Acct Long Text (SKAT)
+12541000 Receivables from Tax Authorities (no
+recon acct)
+12600000 Input Tax (VST)
+12605000 Import Sales Tax paid (VST)
+12606010 Deferred Input tax / Fixed assets VST
+12610000 Input Tax
+22000000 Output Tax (MWS)
+22090000 Withholding Tax Payable
+22100000 Acquisition Tax
+Process Related Information Process 1: Accounts Receivables
+Test script for J59 Accounts Receivables
+Process 2: Accounts Payables
+Test script for J60 Accounts Payables
+Process 3: Accounting and Financial Close
+Test script for J58 Accounting and Financial Close
+Create advances return sales/purchase tax
+Posting via report (RFUMSV00): (as recommended by SAP)
+The report creates the advance return for tax on sales/purchases and, if required, a
+batch input session for making an automatic transfer posting for the tax payable.
+When the system creates a batch input session for the tax payable transfer posting, a
+document is prepared for each company code selected. In this document, one item for
+posting to the tax account and one item for posting to the tax payable account is
+created for each tax account.
+If required, the report starts lling in the form for the advance return for tax on
+sales/purchases (function not covered/delta Customizing). It provides the tax balances
+for each company code, the tax on sales/purchases code, transaction key, total/debit or
+credit indicators, and the selected period in tabular form. The subsequent print report
+uses these tables to determine the data required for the printout.
+You can set the output lists to suit your requirements. You can use the ABAP List Viewer
+function to arrange the lists accordingly.
+Prepare the electronic tax return
+You create the administration report for the electronic data transfer transmission to the
+tax authorities.
+You can successfully execute the Create Advance Return on Sales/Purchase Tax app.
+The next steps to prepare the electronic tax return are as follows
+1/19/2021
+https://help.sap.com/http.svc/dynamicpdfcontentpreview?deliverable_id=23188577&topics=0402e01d86124d76af222862da5… 5/47
+Enter the Data
+Execute the report
+Download the le
+Post Tax Payable
+The output tax account cannot usually be posted directly. This means that a transfer
+posting for the account balance cannot be made directly to the tax payable account.
+You can use the Post Tax Payable app for the tax payable.
+You can use this app to pay tax amounts by posting the balances of input and output tax
+accounts to a tax payable account. The app does not require entry of a tax code,
+enabling you to make manual adjustments to tax accounts directly. Postings can be
+made in all relevant ledgers for the accounts for which you are responsible.
+12606010 Deferred Input tax / Fixed assets VST
+This account is used when you create a vendor invoice with vat code related to deferred tax and
+asset (J5 as an example). The VAT part of this Asset acquisition goes to account 12606010.
+Deferred tax program will transfer taxes from the Interim Tax Account to the Final Tax Account
+after the Vendor's Invoice has been paid for. In other words, program RFUMSV50 transfer
+amount from deferred tax code to target tax code.
+If you think this account is relevant for Foreign Currency Valuation, please congure it via
+SSCUI.
+Posting Examples 22000000 - Output Tax (MWS)-Domestic
+Company A sells computer spare parts to Company B. The sales are taxed at 19% sales tax.
+Company A sells a hard drive for 100 EUR with 84,03 EUR and the sales tax is 15.97 EUR. An
+invoice for 100 EUR incl. the sales tax of 15.97 EUR is created.
+Enter invoice without sales order:
+Debit Credit
+Customer (Company B): 100 EUR Tax code
+**
+41000400 – Sales Revenue w/ Cost
+Element: 84,03 EUR Tax code A1
+22000000 – Output Tax (MWS): 15,97 EUR
+The turnover tax as a diﬀerent liability must be transferred to the nancial oﬃce
+monthly, quarterly, or only at the end of the year, depending on the requirements of the
+tax authorities. In our example, we
+```
+
+</details>
+
+
+## Tables:
+
+
+
+## Programs, Function Modules and Exits:
+
+
+
+## Platforms:
+
+
+
+## S4HANA TAX CONFIG CHECK:
+

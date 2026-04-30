@@ -1,0 +1,620 @@
+---
+title: "SAP ABAP"
+description: "Commands:"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+[![SAP](sap_abap.jpg)](https://community.sap.com/topics/abap "ABAP")
+
+```
+DOCS FOR SAP ABAP
+
+```
+
+Commands:
+
+```
+ABAP ...
+
+```
+
+### General Tables:
+
+| General  | Description  |
+|-----------------|--------------|
+| DD02L | SAP Tables |
+| DD02T | SAP DD: SAP Table Texts |
+| DD03L | Table Fields |
+| DD04L | Data elements |
+| DD25VV | Generated Table for View |
+| TSTC | SAP Transaction Codes |
+| TADIR | Directory of Repository Objects |
+| MODSAPT | SAP Enhancements - Short Texts |
+| MODACT | Modifications |
+| TRDIR | System table TRDIR |
+| TFDIR | Function Module |
+| ENLFDIR | Additional Attributes for Function Modules |
+| TSTCT | Transaction Code Texts |
+| MODSAP | SAP Enhancements |
+| MODSAPT | SAP Enhancements - Short Texts |
+| SCMP | View/Table Comparison |
+| TFTIT | Function Module Short Text |
+| E070 | Transport system: Headers of requests/tasks |
+| E07T | Change & Transport System: Short Texts for Requests/Tasks |
+| E071  | Transport system: Object entries of requests/tasks |
+| MODACTT | Generated Table for View |
+| MODACT | Modifications |
+
+| Basis  | Description  |
+|-----------------|--------------|
+| E070 | Transport system: Headers of requests/tasks |  |
+| E070V | Generated Table for View |  |
+| E071 | Transport system: Object entries of requests/tasks |  |
+| TADIR | Directory of Repository Objects |  |
+| TLOCK | Change and Transport System: Lock Table |  |
+| TSTC | SAP Transaction Codes |  |
+
+| User  | Description  |
+|-----------------|--------------|
+| DEVACCESS | Table for development user |  |
+| TOBC | Class assignment of authorization objects |  |
+| TOBJ | Authorization Objects |  |
+| USR01 | User master record (runtime data) |  |
+| USR02 | Logon Data (Kernel-Side Use) |  |
+| USR03 | User address data |  |
+| USR04 | User master authorizations |  |
+| USR05 | User Master Parameter ID |  |
+| USR10 | User master authorization profiles |  |
+| USR21 | User Name/Address Key Assignment |  |
+| USR40 | Table for illegal passwords |  |
+| USR41 | User master: Additional data |  |
+| UST04 | User masters |  |
+| UST12 | User master: Authorizations |  |
+| V_USERNAME | Generated Table for View |  |
+
+| Address  | Description  |
+|-----------------|--------------|
+| ADCP | Person/Address Assignment (Business Address Services) |  |
+| ADR12 | FTP and URL (Business Address Services) |  |
+| ADR2 | Telephone Numbers (Business Address Services) |  |
+| ADR3 | Fax Numbers (Business Address Services) |  |
+| ADR6 | E-Mail Addresses (Business Address Services) |  |
+| ADRC | Addresses (Business Address Services) | In Logical Database OIRB_LOC REBP. |
+| ADRCITY | Postal cities |  |
+| ADRP | Persons (Business Address Services) |  |
+| ADRT | Communication Data Text (Business Address Services) |  |
+
+| Change Documents  | Description  |
+|-----------------|--------------|
+| CDHDR | Change document header | In Logical Database AAV BBM CRK ERM ILM ODK. |
+| CDPOS | Change document items | In Logical Database AAV BBM CRK ERM ILM ODK. |
+| SE16N_CD_DATA | Table Display: Change Documents - Data |  |
+| SE16N_CD_KEY | Table Display: Change Documents - Header |  |
+| TCDOB | Objects for change document creation |  |
+| TCDOBT | Texts for objects for change document creation |  |
+| Standard text     |  |  |
+| STXB | SAPscript: Texts in non-SAPscript format |  |
+| STXFADM | Smart Forms: Administration |  |
+| STXH | STXD SAPscript text file header | In Logical Database AAV AKV ALV ARV BBM ERM ILM. |
+| STXL | STXD SAPscript text file lines | In Logical Database AAV AKV ALV ARV BBM ERM ILM. |
+
+| Sets  | Description  |
+|-----------------|--------------|
+| SETHEADER | Set Header and Directory |  |
+| SETLEAF | Values in Sets |  |
+| SETNODE | Lower-level sets in sets |  |
+
+| Status  | Description  |
+|-----------------|--------------|
+| JCDO | Change Documents for Status Object (Table JSTO) |  |
+| JCDS | Change Documents for System/User Statuses (Table JEST) | In Logical Database ODK PSJ. |
+| JEST | Individual Object Status | In Logical Database IDF IDFPLUS ODK PSJ. |
+| JSTO | Status object information | In Logical Database ODK PSJ. |
+| TJ02T | System status texts |  |
+| TJ20T | Texts for Status Profiles |  |
+| TJ30 | User Status |  |
+| TJ30T | Texts for User Status |  |
+
+| Characteristics  | Description  |
+|-----------------|--------------|
+| CABN | Characteristic |  |
+| CABNT | Characteristic Descriptions |  |
+| CAWN | Characteristic values |  |
+| CAWNT | Value Texts |  |
+| Classes     |  |  |
+| KLAH | Class Header Data |  |
+| KSML | Characteristics of a Class |  |
+| SWOR | Classification System: Keywords |  |
+
+| Classification  | Description  |
+|-----------------|--------------|
+| AUSP | Characteristic Values |  |
+| KSSK | Allocation Table: Object to Class |  |
+
+| Documents  | Description  |
+|-----------------|--------------|
+| BDS_BAR_EX | Business Document Service: External Bar Codes |  |
+| BDS_BAR_IN | Business Document Service: Internal Bar Codes |  |
+| BDS_PHIO | BDS: Instances of Physical Information Objects |  |
+| DRAW | Document Info Record | In Logical Database DVS. |
+| SRGBTBREL | Relationships in GOS Environment |  |
+| TDWA | Document Types |  |
+| TDWD | Data Carrier/Network Nodes |  |
+| TDWE | Data Carrier Type |  |
+| TOA01 | Link table 1 |  |
+| TOA02 | Link table 2 |  |
+| TOA03 | Link table 3 |  |
+
+| Enterprise Structure   | Description  |
+|-----------------|--------------|
+| T000 | Clients | In Logical Database K1V KOV. |
+| T001 | Company Codes |  |
+| T003 | Document Types |  |
+
+
+| Customizing   | Description  |
+|-----------------|--------------|
+| NRIV | Number Range Intervals | Edit with transaction SNUM. |
+| T006 | Units of Measurement |  |
+| TNRO | Definition of number range objects |  |
+| TNROT | Text for number range object |  |
+|-----------------|--------------|
+
+### SAP ECC Tables & Relationships:
+
+<PDFEmbed src="/pdf/sap-erp-s4hana-abap/1DpMBe8TIw68jsf6Mppom5Zn7H0uu4PjK.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+SAP Table Relationsversion 1.0.0
+compiled by
+Christopher Solomon
+with
+contributions by
+various SAP Professionals
+Table Key
+Link Key
+One-to-One
+One-to-Many
+One One
+One Many
+SAP Table Name
+(Table Description)
+SAP Field Name (Field Description)
+Useful Fields
+SAP Table Information
+How to use this document?
+SAP Field Name (Field Description)
+SAP Table Name
+(Table Description)
+Transparent Table Cluster Table
+This document displays and describes the relationships and links between the various SAP database tables. These relationships are
+displayed graphically as described below:
+Master Data Tables
+CEPC = Profit Center Master Data Table
+CSKS = Cost Center Master
+KNA1 = Cutomer Master (General Data)
+LFA1 = Vendor Master (General Data)
+MARA = Material Master (General Data)
+SKB1 = G/L Account Master (Company Code)
+T001W = Plants/Branches
+T001 = Company Codes
+SAP - FI/CO
+Financial
+Accounting
+Special Purpose
+Ledger
+Controlling
+Accounts
+Payable
+General
+Ledger
+Accounts
+Receivable
+Reconcillation Ledger
+Custom
+Ledger
+Profit Center
+Accounting
+Cost Center
+Accounting
+Tables:
+BSAD
+BSAS
+BSEG
+BSES
+BSIK
+BSIS
+FI/COTable Mapping
+All FI
+documents
+Closed items
+Open Items
+Closed items
+Closed items
+Open Items
+Open Items
+Duplicate Invoices
+VBLNR
+LFC1
+(Vendor master (transaction figures))
+Vendor (LIFNR)
+Company Code (BUKRS)
+Fiscal Year (GJAHR)
+KNC1
+(Customer master (trans  figures))
+Customer (KUNNR)
+Company Code (BUKRS)
+Fiscal Year (GJAHR)
+BSAS
+(Accounting: Secondary index for G/L
+accounts (cleared items))
+Company Code (BUKRS)
+G/L Account (HKONT)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+BSIP
+(Index for vendor validation of double
+documents)
+Company Code (BUKRS)
+Vendor (LIFNR)
+Currency (WAERS)
+Document Date (BLDAT)
+Reference Doc (WRBTR)
+Amount (WRBTR)
+Document No (BELNR)
+Fiscal Year (GJAHR)
+Line Items (BUZEI)
+BSIK
+(Accounting: Secondary index for
+vendors)
+Company Code (BUKRS)
+Vendor (LIFNR)
+Special G/L Trans (UMSKS)
+Special G/L Ind (UMSKZ)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+BSAK
+(Accounting: Secondary index for
+vendors (cleared items))
+Company Code (BUKRS)
+Vendor (LIFNR)
+Special G/L Trans (UMSKS)
+Special G/L Ind (UMSKZ)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+BVOR
+(Intercompany posting procedures)
+Intercompany No (BVORG)
+Company Code (BUKRS)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+PAYR
+(Payment transfer medium file)
+Paying Company (ZBUKR)
+House Bank (HBKID)
+Account (HKTID)
+Payment Method (ZLSCH)
+Check No (CHECKT)
+BSAD
+(Accounting: Secondary index for
+customers (cleared items))
+Company Code (BUKRS)
+Customer (KUNNR)
+Special G/L Trans (UMSKS)
+Special G/L Ind (UMSKZ)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+BKPF
+(Accounting document header)
+Company Code (BUKRS)
+Document No (BELNR)
+Fiscal Year (GJAHR)
+BSEG
+(Accounting document segment)
+Company Code (BUKRS)
+Document No (BELNR)
+Fiscal Year (GJAHR)
+Line Item (BUZEI)
+BSIS
+Company Code (BUKRS)
+G/L Account (HKONT)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+BSID
+(Accounting: Secondary index for
+customers)
+Company Code (BUKRS)
+Customer (KUNNR)
+Special G/L Trans (UMSKS)
+Special G/L Ind (UMSKZ)
+Clearing Date (AUGDT)
+Clearing Doc (AUGBL)
+Allocation No (ZUONR)
+Fiscal Year (GJAHR)
+Document No (BELNR)
+Line Items (BUZEI)
+All FI documents
+One time accounts
+Tax documents
+Financial Accounting
+Physical
+Logical
+BKPF
+(Accounting document header)
+Company Code
+Document No
+Fiscal Year
+BSEC
+BSED
+BSEG
+BSES
+BSET
+Company Code
+Document No
+Fiscal Year
+Line Item
+Company Code
+Document No
+Fiscal Year
+Line Item
+BKPF
+(Accounting document header)
+Company Code
+Document No
+Fiscal Year
+Company Code
+Document No
+Fiscal Year
+Line Item
+BSEG
+(Accounting document
+segment)
+BSEC
+(One-time account data
+document segment)
+BSET
+(Tax data document
+segment)
+RFBLG
+(Cluster for accounting
+document)
+SAP FI/CO
+Profit Center
+Accounting
+ROBJNR
+COBJNR
+Cost Center
+Accounting
+Special Purpose Ledger
+COBJNR
+ROBJNR
+________________________________________________________
+Example of a Custom
+Ledger
+Reconcillation
+Ledger
+ROBJNR
+SAP FI/CO
+ZZGLO
+Object (OBJNR)
+ZZGLT
+Ledger(RLDNR)
+Record Type (RRCTY)
+Version (RVERS)
+Fiscal Year (GJAHR)
+Object (ROBJNR)
+Object (SOBJNR)
+Currency (RTCUR)
+UOM (RUNIT)
+Debit/Credit Ind (DRCRX)
+Period (RPMAX)
+ZZGLO
+Record No (GL_SIRID)
+COFIT
+(Totals records - reconciliation ledger)
+Ledger(RLDNR)
+Record Type (RRCTY)
+Version (RVERS)
+Fiscal Year (GJAHR)
+Object (ROBJNR)
+Object (COBJNR)
+Object (SOBJNR)
+Currency (RTCUR)
+UOM (RUNIT)
+Debit/Credit Ind (DRCRX)
+Period (RPMAX)
+COFIO2
+(Transaction-dependent fields for
+reconciliation ledger)
+Object (OBJNR)
+COFIO1
+(Object Table for Reconciliation
+Ledger COFIT)
+Object (OBJNR)
+COSP
+(CO Object:  Cost Totals - External
+Postings)
+Ledger (LEDNR)
+Object (J_OBJNR)
+Fiscal Year (GJAHR)
+Value Type (WRTTP)
+Version (VERSN)
+Cost Element (KSTAR)
+CO Key (HRKFT)
+CO Trans (VRGNG)
+Trading Part ID (VBUND)
+Trading Part BA (PARGB)
+Debit/Credit Ind (BEKNZ)
+Currency (TWAER)
+Period Block (PERBL)
+COEP
+(CO object:  period-related line items)
+Controlling Area (KOKRS)
+Document No (BELNR)
+Line Item (BUZEI)
+COBK
+Controlling Area (KOKRS)
+Document No (BELNR)
+GLPCA
+(EC-PCA: Actual Line Items)
+Record No (GL_SIRID)
+GLPCO
+(EC-PCA: Object Table for Account
+Assignment Elements)
+Object (OBJNR)
+GLPCT
+(EC-PCA: Totals Table)
+Ledger(RLDNR)
+Record Type (RRCTY)
+Plan Version (RVERS)
+Fiscal Year (GJAHR)
+Object (ROBJNR)
+Object (COBJNR)
+Object (SOBJNR)
+Currency (RTCUR)
+UOM (RUNIT)
+Debit/Credit Ind (DRCRX)
+Period (RPMAX)
+GLPCC
+(EC-PCA: Transaction Attributes)
+Object (OBJNR)
+Controlling
+Accounts Payable
+Vendor Master Data
+Company Code DataGeneral DataPurchasing Data
+LFM1
+(Vendor master record purchasing
+organization data)
+Vendor No (LIFNR)
+Purch Org (EKORG)
+LFM2
+(Vendor Master Record: Purchasing
+Data)
+Vendor No (LIFNR)
+Purch Org (EKORG)
+Sub-range (LTSNR)
+Plant (WERKS)
+LFA1
+(Vendor master (general section))
+Vendor No (LIFNR)
+LFB1
+(Vendor master (company code))
+Vendor No (LIFNR)
+Company Code (BUKRS)
+LFBK
+(Vendor master (bank details))
+Vendor No (LIFNR)
+Bank Cntry (BANKS)
+Bank Key (BANKL)
+Bank Acc (BANKN)
+LFB5
+(Vendor master (dunning data))
+Vendor No (LIFNR)
+Company Code (BUKRS)
+Dunning Area (MABER)
+SAP FI/CO
+Accounts Receivable
+Customer Master Data
+Company Code DataGeneral DataSales Area Data
+SAP FI/CO
+KNA1
+(General Data in Customer Master)
+Customer No (KUNNR)
+KNB1
+(Customer master (company code))
+Customer No (KUNNR)
+Company Code (BUKRS)
+KNB5
+(Customer master (dunning data))
+Customer No (KUNNR)
+Company Code (BUKRS)
+Dunning Area (MABER)
+KNVP
+(Customer Master Partner Functions)
+Customer No (KUNNR)
+Sales Org (VKORG)
+Distribution Ch (VTWEG)
+Division (SPART)
+Partner Function (PARVW)
+Partner Counter (PARZA)
+KNVV
+(Customer Master Sales Data)
+Customer No (KUNNR)
+Sales Org (VKORG)
+Distribution Ch (VTWEG)
+Division (SPART)
+KNVD
+(Customer master record sales
+request form)
+Customer No (KUNNR)
+Sales Org (VKORG)
+Distribution Ch (VTWEG)
+Division (SPART)
+Output Type (NA_KSCHL)
+Mess Language (SPRAS)
+Master Data
+Cost CenterProfit Center
+General Ledger
+Cost Elemet
+SAP FI/CO
+CEPC
+(Profit center master data table)
+Profit Center (PRCTR)
+Valid to Date (DATBI)
+Controlling Area (KOKRS)
+CEPCT
+(Texts for Profit Center Master Data)
+Language (SPRAS)
+Profit Center (PRCTR)
+Valid to Date (DATBI)
+Controlling Area (KOKRS)
+CSKS
+(Cost center master)
+Controlling Area (KOKRS)
+Cost Center (KOSTL)
+Valid to Date (DATBI)
+CSKA
+(Cost elements (data dependent on
+chart of accounts))
+COA (KTOPL)
+Cost Element (KSTAR)
+CSKT
+(Cost Center Texts)
+Language (SPRAS)
+Controlling Area (KOKRS)
+Cost Center (KOSTL)
+Valid to Date (DATBI)
+CSKB
+(Cost elements (data dependent on
+controlling area))
+Controlling Area (KOKRS)
+COA (KTOPL)
+Cost Element (KS
+```
+
+</details>

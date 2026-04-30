@@ -1,0 +1,301 @@
+---
+title: "S4HANA ON-Premise"
+description: "Implementation of SAP S/4HANA 2020 with SAP Best Practices:"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+## Installation Video:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/a0Rx4iGXTh0" frameborder="0" allowfullscreen />
+
+## Installation Guide:
+
+<PDFEmbed src="/pdf/sap-installation-on-premise/1py5IjKlK4GXPUQbWqpoteTLB5mVpCycG.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Installation Guide | PUBLIC
+Document Version: 4.0 – 2020-11-04
+Installation Guide for SAP S/4HANA 1909
+© 2020 SAP SE or an SAP affiliate company. All rights reserved.
+THE BEST RUN
+Content
+1 Getting Started............................................................. 5
+2 SAP S/4HANA System Landscape Information..................................... 6
+3 Installation Documentation.................................................... 8
+4 Product and Database Information.............................................. 11
+5 Maintenance Planner........................................................ 14
+6 Installation Process......................................................... 15
+7 Installation Follow-Up Activities................................................ 16
+7 .1 Applying the Latest Kernel and Support Package Stacks................................. 16
+7 .2 Importing Data to SAP S/4HANA................................................. 17
+SAP S/4HANA Migration Cockpit............................................... 17
+SAP Data Services......................................................... 21
+7 .3 System Configuration for SAP S/4HANA............................................ 21
+7 .4 Installation of SAP Fiori........................................................ 22
+7 .5 User Assistance Settings....................................................... 23
+Enable Context-Sensitive User Assistance and Back-End Help Links...................... 24
+7 .6 Installation of SAP CoPilot...................................................... 31
+7 .7 Installation of the PI Adapters for Elster and Swift...................................... 31
+7 .8 Creating RFC Destinations for liveCache Applications................................... 32
+7 .9 Follow-Up Activities for Advanced Variant Configuration................................. 33
+7 .10 Follow-Up Activities for Predictive Analytics integrator.................................. 34
+Setting up the OData Service................................................. 36
+Setting up the bgRFC Queue.................................................. 39
+Configuring Business Roles for the Backend....................................... 40
+Configuring Business Roles for the Frontend...................................... 44
+7 .11 Follow-Up Activities for Analytics and Planning....................................... 47
+7 .12 Follow Up Activities in Master Data Governance....................................... 47
+7 .13 Follow-Up Activities for Environment, Health, and Safety................................ 48
+7 .14 Follow-Up Activities for Management of Change...................................... 49
+7 .15 Follow-Up Activities for Enterprise Portfolio and Project Management....................... 49
+Follow-Up Activities for SAP Portfolio and Project Management......................... 49
+Follow-Up Activities for Commercial Project Management............................. 50
+7 .16 Follow-Up Activities for Product Safety and Stewardship................................ 62
+Follow-Up Activities for Product Compliance for Discrete Industries...................... 62
+2 PUBLIC
+Installation Guide for SAP S/4HANA 1909
+Content
+Follow-Up Activities for Product Safety and Stewardship for Process Industries.............. 63
+7 .17 Follow-Up Activities for Product Compliance......................................... 63
+7 .18 Follow-Up Activities for Supplier Management........................................ 64
+7 .19 Follow-Up Activities for Human Resources (Compatibility Packs)........................... 65
+Integration in SAP S/4HANA.................................................. 65
+Integration Scenarios....................................................... 66
+Conversion from SAP ERP to SAP S/4HANA....................................... 77
+Employee-Business Partner Synchronization...................................... 81
+FAQ................................................................... 91
+Related Notes............................................................ 91
+7 .20 Follow-Up Activities for SAP S/4HANA for Central Procurement........................... 91
+Integration in SAP S/4HANA.................................................. 91
+Integration Scenarios....................................................... 92
+7 .21 Follow-Up Activities for Agricultural Contract Management............................... 94
+Integration with Oil & Gas and Commodity Management.............................. 96
+7 .22 Follow-Up Activities for Policy Management......................................... 96
+7 .23 Follow-Up Activities for Insurance Product Engine msg.PMQ.............................. 98
+7 .24 Follow-Up Activities for T ransportation Management................................... 99
+7 .25 Follow-Up Activities for Data Quality Management, version for SAP Solutions.................. 99
+7 .26 Follow-Up Activities for Service.................................................. 99
+7 .27 T roubleshooting............................................................ 100
+Installation Guide for SAP S/4HANA 1909
+Content PUBLIC 3
+Document History
+Version Date Description
+1.0 September 20, 2019 First published version for SAP S/
+4HANA 1909.
+1.01 September 23, 2019 Additions to section Follow-Up Activi­
+ties for Analytics and Planning [page
+47].
+2.0 February 12, 2020 Version for SAP S/4HANA 1909 FPS01.
+3.0 May 06, 2020 Version for SAP S/4HANA 1909 FPS02.
+3.1 July 10, 2020 Updated section User Assistance Set­
+tings [page 23].
+3.2 August 03, 2020 Corrected SAP Notes in section Overall
+Implementation Sequence [page 50].
+4.0 November 04, 2020 Version for SAP S/4HANA 1909 SPS03.
+4 PUBLIC
+Installation Guide for SAP S/4HANA 1909
+Document History
+1 Getting Started
+This guide provides you with the following information about SAP S/4HANA:
+● A system landscape and product overview
+● A list of the tools and documentation you need for the installation
+● Important follow-up activities you need to consider after the installation
+ Note
+This guide cannot be used on its own, you need to use it together with the installation guides describing the
+installation of Application Server Systems with the Software Provisioning Manager 2.0 tool.
+Y ou find these guides (as well as a link to the SPM tool) on the SAP Support Portal at https:/ /
+support.sap.com/sltoolset
+ System Provisioning
+  System Provisioning Scenarios
+  Install a System
+using Software Provisioning Manager
+  Installation Option of Software Provisioning Manager 2.0 <latest
+SP>
+  Installation Guides - Application Server Systems
+ .
+These installation guides are sorted by database, technical stack (ABAP and Java), and operating system
+platform. For the installation of SAP S/4HANA, choose the SAP HANA Database guide for your operating
+system (UNIX, IBM, or Windows), the ABAP Stack and the SAP HANA Database.
+ Note
+Java components and databases other than SAP HANA are still installed using the 1.0 version of the
+Software Provisioning Manager. Y ou find the guides for version 1.0 on the same page as those for version
+2.0 (see note above), just choose Installation Option of Software Provisioning Manager 1.0 <latest SP>.
+Installation Guide for SAP S/4HANA 1909
+Getting Started PUBLIC 5
+2 SAP S/4HANA System Landscape
+Information
+There are various ways of deploying SAP S/4HANA in your new or already existing system landscape. This
+section describes some examples.
+Example: SAP S/4HANA New Installation
+A new installation of SAP S/4HANA needs to run on the SAP HANA database. It is recommended to use the
+SAP Solution Manager, which can run on any database. This very simple landscape can be enhanced with the
+SAP cloud solutions and SAP Business Suite products.
+Simple SAP S/4HANA Deployment
+Example: SAP S/4HANA in an SAP Business Suite Landscape
+It is possible to integrate SAP S/4HANA into an existing SAP Business Suite landscape by replacing the SAP
+ERP enhancement package product with SAP S/4HANA. When performing this conversion in your syste
+```
+
+</details>
+
+
+## Administration Guide:
+
+Implementation of SAP S/4HANA 2020 with SAP Best Practices:
+
+<PDFEmbed src="/pdf/sap-installation-on-premise/102ujeia_P5j2OKv76lKAQXKw5iAZsq3k.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Administration Guide | PUBLIC
+2020-12-08
+Administration Guide to Implementation of SAP
+S/4HANA 2020 with SAP Best Practices
+© 2020 SAP SE or an SAP affiliate company. All rights reserved.
+THE BEST RUN
+Content
+1 About This Guide............................................................ 4
+1.1 T ransaction List.............................................................. 5
+2 Prerequisite Settings......................................................... 7
+2.1 Required Enterprise Business Functions............................................. 7
+Activating Enterprise Business Functions.......................................... 9
+2.2 Setting Up a New Best Practices Client - Client Setup Alternatives........................... 9
+Alternative 1: Setting Up a Best Practices Client..................................... 11
+Alternative 2 - Setting Up a Merged Client (All Client 000 Reference Settings)............... 14
+Handling Language Imports.................................................. 15
+Editing Client Currency Setting................................................ 17
+2.3 Carrying Out T echnical Setup.................................................... 17
+Exporting Metadata Lists for Fiori UI Add-Ons and OData Services....................... 19
+SAP Notes and Messages.................................................... 20
+Create Basic Settings in the SAP S/4HANA Back End System.......................... 28
+Creating Basic Settings for Using SAP Fiori Launchpad (Back End System)................. 30
+Setting Up SAP S/4HANA Attachment Services (Back End System)...................... 35
+Setting Up SAP S/4HANA Attachment Services (Front End System)...................... 39
+2.4 Carrying Out Settings for Implementation........................................... 39
+Providing Users for Content Activation.......................................... 40
+Creating a Dialog User for Content Activation...................................... 40
+Preventing Time Out Short Dumps............................................. 42
+3 Implementation............................................................ 43
+3.1 Getting the Most Recent SAP Best Practices Content................................... 43
+3.2 Importing Solutions from SAP Best Practices Content.................................. 44
+3.3 Defining the Scope of Y our Solution............................................... 45
+Generating Configuration Information........................................... 48
+3.4 Defining the Scope of a Business Scenario for Integrating SAP S/4HANA with Decentralized
+Extended Warehouse Management (EWM) Based On SAP S/4HANA........................ 52
+Scope Items in the ERP System................................................ 53
+Scope Items in the EWM System............................................... 54
+3.5 Pricing Relevant Scope Items.................................................... 54
+3.6 Activating Y our Solution....................................................... 58
+Prerequisite Settings for Activation............................................. 61
+Changing SAP Best Practices Content........................................... 97
+Handling Installation Errors During Activation..................................... 101
+2 PUBLIC
+Administration Guide to Implementation of SAP S/4HANA 2020 with SAP Best Practices
+Content
+Carrying Out Post-Activation Configuration....................................... 104
+Evaluating Business Content / Scope Items...................................... 190
+Prerequisites for T esting Scope Items........................................... 191
+3.7 Executing Manual Rework Activities............................................... 191
+Generating a manual rework solution........................................... 191
+T ransferring a manual rework solution to the target client............................. 192
+Activating a manual rework solution............................................ 193
+3.8 Deleting the Metadata Cache................................................... 193
+3.9 Checking and Releasing the T ransports............................................ 195
+Workaround for Manually T ransporting the Payment Card T ype......................... 195
+3.10 Handling Data Migration Content................................................ 197
+3.11 Known Issues.............................................................. 197
+Preventing Out of Memory Dumps............................................. 197
+4 Upgrade................................................................. 199
+4.1 2020.................................................................... 199
+Configuring Settings in the Back End System for Context-Sensitive User Assistance.......... 199
+Assigning Business Roles to a User............................................ 201
+Executing Basic SAP Fiori Configuration........................................ 202
+Generating Configuration Information.......................................... 202
+5 Glossary................................................................. 206
+Administration Guide to Implementation of SAP S/4HANA 2020 with SAP Best Practices
+Content PUBLIC 3
+1 About This Guide
+This guide describes the procedures for adapting SAP Best Practices solutions for SAP S/4HANA to the
+company's needs. It contains information about providing the system, implementation tools, and the solution
+content.
+ Note
+This guide is frequently updated as per customer/partner feedback. If you use the PDF version, we
+recommend you come back and download the PDF version when you actually need it in your
+implementation to get the latest information.
+Strategies for implementing SAP solutions
+For a new implementation of SAP S/4HANA, you can decide whether or not to use SAP Best Practices
+implementation content (pre-configured solution packages). The 2 strategies are described below.
+Implementation strat­
+egy Details Implementation procedure
+With SAP Best Practi­
+ces content
+● The SAP Best Practices content configures a client with
+automatic content activation. It contains only essential
+configuration settings for the selected scope. It is re­
+quired if you want to use the integrated model company
+from SAP with running integrated processes provided
+by the SAP Best Practices content.
+● After the activation of the SAP Best Practices solution,
+you can either extend or create your own configuration
+in the implementation guide (transaction SPRO). The
+automatic content upgrade to the next release is not
+possible via Solution Builder.
+The SAP Best Practices content is
+already included in your system.
+Check SAP Note 2914416
+  to
+see if a more recent content version
+is available for download, import
+the local solution and installation
+data files to the SAP Best Practices
+Solution Builder and then activate
+the content.
+Without SAP Best
+Practices content
+● Customizing activities are carried out in transaction
+SPRO.
+● Y our solutions are not compatible with future SAP Best
+Practices content.
+Customizing projects based on im­
+plementation guide (transaction
+SPRO)
+Further details about this imple­
+mentation procedure are not cov­
+ered in this guide.
+4 PUBLIC
+Administration Guide to Implementation of SAP S/4HANA 2020 with SAP Best Practices
+About This Guide
+1.1 Transaction List
+The following table lists the transactions referenced in this guide (excluding transactions that may be referred
+to in external documentation).
+T ransaction Code Description
+/IWFND/
+MAINT_SERVICE
+Activate and Maintain Services
+/nOAC0 Display Content Repositories: Overview
+/nOACT Change View "Maintain Categories": Overview
+BRF+ Business Rule Framework plus
+PFCG Role Maintenance
+PFTC_CHG T ask: Maintain
+RZ10 Display Profiles
+RZ11 Maintain Profile Parameters
+SA38 ABAP: Program Execution
+SCC1 Client Copy
+SCC3 Client T ools Log Analysis
+SCC4 Display View "Clients": Overview
+SCCL Client Copy - Copy Client
+SCPR20 Business Configuration Sets: Activation
+SE16 Data Browser: Initial Screen
+SE38 ABAP Editor: Initial Screen
+SFW5
+```
+
+</details>

@@ -1,0 +1,129 @@
+---
+title: "S4HANA ON AZURE"
+---
+
+import PDFEmbed from '@/components/PDFEmbed.astro';
+
+## Installation Video:
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/Pr1JXY1pIRQ" frameborder="0" allowfullscreen />
+
+## Installation Guide:
+
+<PDFEmbed src="/pdf/sap-installation-azure/1pTjRHYchtNJzh4ujViXj6DUNF-RD73C_.pdf" />
+
+<details>
+<summary>Show extracted text</summary>
+
+
+```text
+Sachin Ghorpade
+S/4H Installation in
+Azure
+SETUP AND CONFIG IN ONE DAY
+S/4H Installation in Azure                                                                                                                      1 | P a g e
+Table of Contents
+Overview ..................................................................................................................................................... 2
+Key Observations ........................................................................................................................................ 2
+Pre-Requisite .............................................................................................................................................. 3
+Setup Detail ................................................................................................................................................ 3
+1. Setup the VM for database layer ........................................................................................................ 4
+2. Setup the VM for application layer ..................................................................................................... 4
+3. Generate the stack configuration file.................................................................................................. 5
+4. Download the SAP Installation bits ..................................................................................................... 8
+5. Prepare the database host .................................................................................................................. 8
+6. Install the S/4H with Fiori .................................................................................................................... 9
+6.1 Upgrade with SUM .......................................................................................................................... 24
+7. Configure the Fiori ............................................................................................................................ 31
+Appendix ................................................................................................................................................... 33
+S/4H Installation in Azure                                                                                                                      2 | P a g e
+Overview
+You want to perform a setup of SAP S/4 HANA in Azure . And you do want to do it quick so that you can
+experience the overall process and get ready for your landscape deployment. If so, this document is for
+you. This document enables you to perform the setup and configuration of the S/4H in Azure.
+In this setup, we used the embedded option of SAP Fiori. What is embedded option? Don’t worry, we will
+cover the basics later in this document. This is a hybrid mode installation where SAP Application layer runs
+on Windows and Large Instances on linux operating system.
+Yes! You can accomplish this all in less than 1 day. Excited? Let’s begin…
+Note! This document does not replace any of the SAP documentation. In fact, this document
+complements those SAP documentations like Installation, config, or operations guide.
+Key Observations
+Before we jump to the installation, let’s first learn the few concepts/information.
+1. You need SWPM2.0 SP2 for S/4H 1809 installation. With SWPM2SP02, you get the option to
+install the following components
+2. You need to download a stack configuration file which you pass to SWPM for the installation.
+Refer Generate the stack configuration file for more details.
+3. When you install Fiori server on top of S/4H Server, it is done via a SUM. SWPM automatically
+triggers the SUM (if selected in the SWPM option) to install the Fiori components.
+4. STMS is automatically setup by SWPM.
+5. You don’t extract the .SAR or .ZIP files (except for the SWPM one).  SWPM automatically extracts
+them during its execution.
+6. There are two options to install Fiori components with S/4H:
+a. Embedded: In this case, Fiori components are installed on the S/4H layer.
+S/4H Installation in Azure                                                                                                                      3 | P a g e
+b. Hub: In this case, Fiori components are installed on the separate server than the S/4H
+server.
+7. SWPM installs the following product version as part of the installation:
+• SAP S/4HANA 1809
+And then SUM will install the following add-ons:
+• SAP S/4HANA Foundation 1809
+• ABAP Platform 1809
+• SAP FIORI for SAP S/4HANA 1809
+• SAP FIORI FRONT-END Server 5.0
+Pre-Requisite
+• Virtual Machine is up and running for SAP Application layer
+• Virtual Machine is up and running for database layer
+• You have read master guide and installation guide from SAP
+• You have validated the supported VMs for your workload (OSS note: 1928533)
+• You have reviewed the Product Availability Matrix (PAM) for your OS, database, and SAP
+application support
+• SAP installation bits are download (Requires an OSS ID)
+Setup Detail
+• HANA Database server
+o VM: Standard GS5 (32 vcpus, 448 GB memory)
+o Operating System: SLES for SAP 12 SP3
+o HANA Version: HANA 2 SP3 Rev 33
+• Application server
+o VM: Standard DS3 v2 (4 vcpus, 14 GB memory)
+o Operating System: Windows Server 2016 Datacenter
+o S/4H version: 1809
+S/4H Installation in Azure                                                                                                                      4 | P a g e
+Here is the overall setup and configuration flow looks like:
+1. Setup the VM for database layer
+2. Setup the VM for application layer
+3. Generate the stack configuration file
+4. Download the SAP Installation bits
+5. Prepare the database host
+6. Install the S/4H with Fiori
+7. Configure the Fiori
+1. Setup the VM for database layer
+Please follow the documentation available Create a VM thru Azure portal. You use the following
+configuration:
+• VM Type: Standard GS5 (32 vcpus, 448 GB memory).
+• Operating System: SUSE 12 SP3 for SAP.
+• Disks: Three premium disks: /hana/shared, hana/data, and /hana/logs. You can size
+them according to your need.
+• You use “yast” to partition/format those disks with “ext4” file type.
+2. Setup the VM for application layer
+Please follow the documentation available Create a VM thru Azure portal. You use the following
+configuration:
+• VM Type: Standard DS3 v2 (4 vcpus, 14 GB memory).
+• Operating System: Windows Server 2016 Datacenter.
+• Disks: One premium disk for downloads and SAP Instance installation. You can size them
+according to your need.
+• You use “Disk Management” to partition/format the disk.
+S/4H Installation in Azure                                                                                                                      5 | P a g e
+3. Generate the stack configuration file
+SAP made it easy for installation and to download the bits. You need to generate the stack file.
+Do you need solution manager? No. Good news is you can generate the stack file from SAP’s
+support portal.
+Click https://apps.support.sap.com/sap(bD1lbiZjPTAwMQ==)/support/mp/index.html (requires
+OSS credentials). This should open a maintenance planner.
+Click “Plan for S4HANA” tile.
+Select “Install New SAP S/4HANA System”
+Enter SID and select the target version of the S/4H stack
+Select frontend server option. In this installation, we chose “Co-deployed with
+Backend”.
+```
+
+</details>
