@@ -5,13 +5,15 @@
   --sl-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* Match the actual rendered height of the custom Header.astro bar
-     so the sticky sidebar and content offsets align. */
-  --sl-nav-height: 3rem;
+     so the sticky sidebar and content offsets align. The bridge contains
+     a Search button + ThemeSelect dropdown which set the floor height
+     (~36-40px), plus 16px vertical padding + 1px border ≈ 60px. */
+  --sl-nav-height: 4rem;
 }
 
 @media (max-width: 50rem) {
   :root {
-    --sl-nav-height: 2.75rem;
+    --sl-nav-height: 3.5rem;
   }
 }
 
