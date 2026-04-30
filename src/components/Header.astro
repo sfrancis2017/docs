@@ -1,59 +1,70 @@
 ---
-import Default from '@astrojs/starlight/components/Header.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 ---
 
-<div class="site-bridge">
+<header class="site-bridge">
   <div class="site-bridge-inner">
-    <a href="https://sajivfrancis.com/" class="bridge-logo" aria-label="Sajiv Francis — home">
-      <img src="/img/logo.png" alt="" width="22" height="22" />
-      <span>Sajiv Francis</span>
+    <a
+      href="https://sajivfrancis.com/"
+      class="bridge-logo"
+      aria-label="Sajiv Francis — home"
+    >
+      <img src="/img/logo.png" alt="" width="45" height="36" />
     </a>
-    <nav class="bridge-nav" aria-label="Cross-site navigation">
+
+    <nav class="bridge-nav" aria-label="Site navigation">
       <a href="https://sajivfrancis.com/">Home</a>
       <a href="https://sajivfrancis.com/blog/">Writing</a>
       <a href="https://sajivfrancis.com/about/">About</a>
       <a href="https://sajivfrancis.com/chat/">Chat</a>
       <span class="bridge-current" aria-current="page">Docs</span>
     </nav>
-  </div>
-</div>
 
-<Default><slot /></Default>
+    <div class="bridge-actions">
+      <div class="bridge-search">
+        <Search />
+      </div>
+      <SocialIcons />
+      <ThemeSelect />
+      <div class="bridge-mobile-only">
+        <MobileMenuToggle />
+      </div>
+    </div>
+  </div>
+</header>
 
 <style>
   .site-bridge {
     background: var(--sl-color-bg-nav);
     border-bottom: 1px solid var(--sl-color-hairline);
-    font-size: 0.8125rem;
   }
 
   .site-bridge-inner {
-    max-width: var(--sl-content-width);
-    margin: 0 auto;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .bridge-logo {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--sl-color-text);
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: -0.01em;
   }
 
-  .bridge-logo:hover { color: var(--sl-color-text-accent); }
-  .bridge-logo img { height: 20px; width: auto; flex-shrink: 0; }
+  .bridge-logo img {
+    height: 36px;
+    width: auto;
+  }
 
   .bridge-nav {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
+    font-size: 0.875rem;
   }
 
   .bridge-nav a {
@@ -62,20 +73,41 @@ import Default from '@astrojs/starlight/components/Header.astro';
     transition: color 200ms ease;
   }
 
-  .bridge-nav a:hover { color: var(--sl-color-text); }
+  .bridge-nav a:hover {
+    color: var(--sl-color-text);
+  }
 
   .bridge-current {
     color: var(--sl-color-text);
     font-weight: 500;
   }
 
-  @media (max-width: 50rem) {
-    .site-bridge-inner { padding: 0.5rem 0.75rem; }
-    .bridge-logo span { display: none; }
-    .bridge-nav { gap: 0.875rem; font-size: 0.75rem; }
+  .bridge-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    margin-left: auto;
   }
 
-  @media (max-width: 30rem) {
-    .bridge-nav { gap: 0.625rem; }
+  .bridge-mobile-only {
+    display: none;
+  }
+
+  /* Tablet and below: hide cross-site nav (logo still links home), show hamburger */
+  @media (max-width: 50rem) {
+    .site-bridge-inner {
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+    }
+    .bridge-logo img {
+      height: 28px;
+    }
+    .bridge-nav {
+      display: none;
+    }
+    .bridge-mobile-only {
+      display: flex;
+    }
   }
 </style>
