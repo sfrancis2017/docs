@@ -1,0 +1,7 @@
+---
+// Starlight's default SkipLink renders a "Skip to content" anchor that's
+// supposed to be visually hidden until keyboard-focused. With our custom
+// header it was leaking into the layout. Empty override removes it.
+// (Trade-off: keyboard users lose a one-tap skip-to-main; can be reinstated
+// later with proper sr-only styling if a11y review surfaces it.)
+---

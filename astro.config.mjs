@@ -36,6 +36,7 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       components: {
         Header: './src/components/Header.astro',
+        SkipLink: './src/components/SkipLink.astro',
       },
       social: [
         {
