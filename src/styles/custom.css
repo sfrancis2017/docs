@@ -1,53 +1,21 @@
-/* Editorial palette overrides — match sajivfrancis.com */
+/* Editorial palette — match sajivfrancis.com (warm, restrained) */
 
 :root {
   --sl-font: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --sl-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
-/* Light theme tokens */
-:root[data-theme='light'] {
-  --sl-color-bg: #FAFAF7;
-  --sl-color-bg-nav: #FAFAF7;
-  --sl-color-bg-sidebar: #FAFAF7;
-  --sl-color-bg-inline-code: #F0EEE8;
-  --sl-color-text: #1A1A1A;
-  --sl-color-text-accent: #B85450;
-  --sl-color-text-invert: #FAFAF7;
-  --sl-color-hairline: #E8E5DE;
-  --sl-color-hairline-light: #E8E5DE;
-  --sl-color-hairline-shade: #C9C5BC;
-  --sl-color-accent: #B85450;
-  --sl-color-accent-low: #F1DEDD;
-  --sl-color-accent-high: #8B3F3C;
-  --sl-color-white: #FFFFFF;
-  --sl-color-gray-1: #1A1A1A;
-  --sl-color-gray-2: #2A2826;
-  --sl-color-gray-3: #6B6864;
-  --sl-color-gray-4: #8A8682;
-  --sl-color-gray-5: #C9C5BC;
-  --sl-color-gray-6: #E8E5DE;
-  --sl-color-gray-7: #F0EEE8;
-  --sl-color-black: #1A1A1A;
-}
+/*
+ * Starlight uses a semantic-flip pattern:
+ *   --sl-color-white  = high-contrast text color (dark in light, light in dark)
+ *   --sl-color-black  = high-contrast bg color  (light in light, dark in dark)
+ * gray-1 .. gray-7 = scale from text-like (1) to bg-like (7).
+ */
 
-/* Dark theme tokens */
-:root[data-theme='dark'] {
-  --sl-color-bg: #0F0F0F;
-  --sl-color-bg-nav: #0F0F0F;
-  --sl-color-bg-sidebar: #0F0F0F;
-  --sl-color-bg-inline-code: #1A1A1A;
-  --sl-color-text: #F0EFEA;
-  --sl-color-text-accent: #D87572;
-  --sl-color-text-invert: #0F0F0F;
-  --sl-color-hairline: #2A2826;
-  --sl-color-hairline-light: #2A2826;
-  --sl-color-hairline-shade: #3A3835;
-  --sl-color-accent: #D87572;
-  --sl-color-accent-low: #2A1F1E;
-  --sl-color-accent-high: #E89895;
+/* DARK mode (default) — natural mapping */
+:root {
   --sl-color-white: #F0EFEA;
-  --sl-color-gray-1: #F0EFEA;
+  --sl-color-gray-1: #E0DFDA;
   --sl-color-gray-2: #C9C5BC;
   --sl-color-gray-3: #8A8682;
   --sl-color-gray-4: #6B6864;
@@ -55,7 +23,48 @@
   --sl-color-gray-6: #2A2826;
   --sl-color-gray-7: #1A1A1A;
   --sl-color-black: #0F0F0F;
+
+  --sl-color-accent: #D87572;
+  --sl-color-accent-low: #2A1F1E;
+  --sl-color-accent-high: #E89895;
+
+  --sl-color-text: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-black);
+  --sl-color-bg-sidebar: var(--sl-color-black);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
 }
 
-/* Slightly tighter site title — match main site feel */
+/* LIGHT mode — semantic flip */
+:root[data-theme='light'] {
+  --sl-color-white: #1A1A1A;     /* now means the dark text color */
+  --sl-color-gray-1: #2A2826;
+  --sl-color-gray-2: #3A3835;
+  --sl-color-gray-3: #6B6864;
+  --sl-color-gray-4: #8A8682;
+  --sl-color-gray-5: #C9C5BC;
+  --sl-color-gray-6: #E8E5DE;
+  --sl-color-gray-7: #F0EEE8;
+  --sl-color-black: #FAFAF7;     /* now means the light bg color */
+
+  --sl-color-accent: #B85450;
+  --sl-color-accent-low: #F1DEDD;
+  --sl-color-accent-high: #8B3F3C;
+
+  --sl-color-text: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-black);
+  --sl-color-bg-sidebar: var(--sl-color-black);
+  --sl-color-bg-inline-code: var(--sl-color-gray-7);
+  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
+}
+
+/* Slightly tighter site title */
 .site-title { letter-spacing: -0.01em; }
