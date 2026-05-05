@@ -114,9 +114,13 @@
 <style>
   #chat-launcher-button {
     position: fixed;
-    bottom: 1.5rem;
+    /* iOS safe-area aware so the button doesn't sit under the home
+       indicator on notched phones */
+    bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
     right: 1.5rem;
-    z-index: 30;
+    /* Very high z-index — Starlight's mobile sidebar/TOC bars use up
+       to ~50; we need to beat them on mobile */
+    z-index: 9998;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -138,7 +142,9 @@
   #chat-launcher-modal {
     position: fixed;
     inset: 0;
-    z-index: 50;
+    /* Above the launcher button AND any Starlight chrome (sticky TOC,
+       mobile menu, header). 9999 is the conventional "always on top" */
+    z-index: 9999;
   }
   #chat-launcher-modal[hidden] {
     display: none;
@@ -240,6 +246,17 @@
   ) as HTMLIFrameElement;
   const iconExpand = expandBtn.querySelector('.icon-expand')!;
   const iconCollapse = expandBtn.querySelector('.icon-collapse')!;
+
+  // Portal the modal to <body> so it escapes any stacking context
+  // imposed by Starlight's layout wrappers (translate/transform/filter
+  // ancestors create new stacking contexts that trap fixed-position
+  // children regardless of z-index). The button stays in place.
+  if (modal.parentNode !== document.body) {
+    document.body.appendChild(modal);
+  }
+  if (button.parentNode !== document.body) {
+    document.body.appendChild(button);
+  }
 
   let mounted = false;
   let lastScrollY = 0;
