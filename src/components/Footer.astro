@@ -1,0 +1,10 @@
+---
+// Override of Starlight's default Footer. Renders the default footer
+// untouched, then mounts the floating chat launcher so it appears on
+// every doc page.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import ChatLauncher from './ChatLauncher.astro';
+---
+
+<Default><slot /></Default>
+<ChatLauncher />

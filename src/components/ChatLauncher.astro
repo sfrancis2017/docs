@@ -1,0 +1,282 @@
+---
+// Floating chat launcher: bottom-right button → modal iframe of
+// chat.sajivfrancis.com. Mirrors what sajivfrancis.com does in its
+// BaseLayout, so the chat surface is one click away from anywhere
+// across the site (main + docs).
+//
+// Visual uses Starlight's CSS custom properties (--sl-color-*) so it
+// auto-adapts to light/dark theme without us reimplementing a theme
+// switcher.
+---
+
+<button
+  type="button"
+  id="chat-launcher-button"
+  aria-label="Open chat"
+  title="Chat with Sajiv"
+>
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+</button>
+
+<div
+  id="chat-launcher-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Chat with Sajiv"
+  hidden
+>
+  <div id="chat-launcher-backdrop"></div>
+  <div id="chat-launcher-panel">
+    <div class="chat-launcher-header">
+      <span>Chat with Sajiv</span>
+      <div class="chat-launcher-controls">
+        <button
+          type="button"
+          id="chat-launcher-expand"
+          aria-label="Expand chat"
+        >
+          <svg
+            class="icon-expand"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <svg
+            class="icon-collapse hidden"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="4 14 10 14 10 20"></polyline>
+            <polyline points="20 10 14 10 14 4"></polyline>
+            <line x1="14" y1="10" x2="21" y2="3"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="chat-launcher-close"
+          aria-label="Close chat"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <iframe
+      id="chat-launcher-iframe"
+      title="Chat with Sajiv"
+    ></iframe>
+  </div>
+</div>
+
+<style>
+  #chat-launcher-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 30;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--sl-color-text);
+    color: var(--sl-color-bg);
+    border: 0;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.18);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 200ms ease;
+    print-color-adjust: exact;
+  }
+  #chat-launcher-button:hover {
+    opacity: 0.92;
+  }
+
+  #chat-launcher-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+  }
+  #chat-launcher-modal[hidden] {
+    display: none;
+  }
+
+  #chat-launcher-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.4);
+  }
+
+  #chat-launcher-panel {
+    position: absolute;
+    inset: 0;
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline);
+    box-shadow: 0 12px 48px rgb(0 0 0 / 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    #chat-launcher-panel {
+      inset: auto 1.5rem 1.5rem auto;
+      width: 420px;
+      height: 640px;
+      max-height: calc(100vh - 3rem);
+      border-radius: 0.75rem;
+    }
+  }
+
+  #chat-launcher-panel.expanded {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .chat-launcher-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--sl-color-text);
+  }
+
+  .chat-launcher-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .chat-launcher-controls button {
+    background: transparent;
+    border: 0;
+    color: var(--sl-color-text-accent);
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    transition: color 150ms ease;
+  }
+  .chat-launcher-controls button:hover {
+    color: var(--sl-color-text);
+  }
+
+  /* Mobile: hide expand button, modal already takes full screen */
+  @media (max-width: 767px) {
+    #chat-launcher-expand {
+      display: none;
+    }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  #chat-launcher-iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+  }
+</style>
+
+<script>
+  const button = document.getElementById('chat-launcher-button')!;
+  const modal = document.getElementById('chat-launcher-modal') as HTMLElement;
+  const backdrop = document.getElementById('chat-launcher-backdrop')!;
+  const closeBtn = document.getElementById('chat-launcher-close')!;
+  const expandBtn = document.getElementById('chat-launcher-expand')!;
+  const panel = document.getElementById('chat-launcher-panel')!;
+  const iframe = document.getElementById(
+    'chat-launcher-iframe',
+  ) as HTMLIFrameElement;
+  const iconExpand = expandBtn.querySelector('.icon-expand')!;
+  const iconCollapse = expandBtn.querySelector('.icon-collapse')!;
+
+  let mounted = false;
+  let lastScrollY = 0;
+
+  function openLauncher() {
+    if (!mounted) {
+      iframe.src = 'https://chat.sajivfrancis.com';
+      mounted = true;
+    }
+    lastScrollY = window.scrollY;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLauncher() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    button.focus();
+    window.scrollTo(0, lastScrollY);
+  }
+
+  function toggleExpand() {
+    const expanded = panel.classList.toggle('expanded');
+    iconExpand.classList.toggle('hidden', expanded);
+    iconCollapse.classList.toggle('hidden', !expanded);
+    expandBtn.setAttribute(
+      'aria-label',
+      expanded ? 'Collapse chat' : 'Expand chat',
+    );
+  }
+
+  button.addEventListener('click', openLauncher);
+  backdrop.addEventListener('click', closeLauncher);
+  closeBtn.addEventListener('click', closeLauncher);
+  expandBtn.addEventListener('click', toggleExpand);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeLauncher();
+  });
+</script>

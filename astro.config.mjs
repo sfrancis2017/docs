@@ -37,6 +37,7 @@ export default defineConfig({
       components: {
         Header: './src/components/Header.astro',
         SkipLink: './src/components/SkipLink.astro',
+        Footer: './src/components/Footer.astro',
       },
       social: [
         {
