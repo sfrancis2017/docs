@@ -32,6 +32,29 @@ export default defineConfig({
             src: '//gc.zgo.at/count.js',
           },
         },
+        // Cross-subdomain theme sync. Reads `theme` cookie (scoped to
+        // .sajivfrancis.com) on load and overrides the resolved Starlight
+        // theme; observes data-theme changes (Starlight's own toggle)
+        // and writes them back to the cookie. Result: toggling on
+        // sajivfrancis.com or chat.sajivfrancis.com carries here, and
+        // toggling here carries to them.
+        {
+          tag: 'script',
+          content: `(function(){
+  function readCookie(){var m=document.cookie.match(/(?:^|;\\s*)theme=(light|dark)/);return m?m[1]:null;}
+  function writeCookie(v){document.cookie='theme='+v+'; Domain=.sajivfrancis.com; Path=/; Max-Age=31536000; SameSite=Lax; Secure';}
+  var c=readCookie();
+  if(c){document.documentElement.dataset.theme=c;try{localStorage.setItem('starlight-theme',c);}catch(_){} }
+  new MutationObserver(function(muts){
+    for(var i=0;i<muts.length;i++){
+      if(muts[i].attributeName==='data-theme'){
+        var v=document.documentElement.dataset.theme;
+        if(v==='light'||v==='dark'){if(v!==readCookie())writeCookie(v);}
+      }
+    }
+  }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();`,
+        },
       ],
       customCss: ['./src/styles/custom.css'],
       components: {
