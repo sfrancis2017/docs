@@ -2,16 +2,16 @@
 title: "SAP Central Finance: Architecture, Integration & Configuration"
 description: "SAP Central Finance: Architecture, Integration & Configuration"
 chat-published: true
-published-at: 2026-05-15T22:57:48.721Z
+published-at: 2026-05-15T23:11:01.079Z
 chat-corpus-snapshot: 2026-05-15
 ---
 
 # SAP Central Finance: Architecture, Integration & Configuration
-By Me · July 2025
+By I · July 2025
 
 ## Executive Summary
 
-Central Finance (CFIN) is SAP's standard solution for creating a harmonized, real-time financial hub across heterogeneous ERP landscapes. I map every upstream source, every downstream consumer, and the full configuration chain required to bring the system to production. It covers the complete integration architecture, SAP LT Replication Server setup, AIF monitoring and error handling, Central Payments configuration, Accounting View of Logistics, reconciliation reporting, real-time replication verification, and a consolidated 97-item go-live checklist — grounded entirely in the SAP PRESS reference material and the Central Finance 2020 Configuration & User Guide.
+Central Finance (CFIN) is SAP's standard solution for creating a harmonized, real-time financial hub across heterogeneous ERP landscapes. This white paper maps every upstream source, every downstream consumer, and the full configuration chain required to bring the system to production. It covers the complete integration architecture, SAP LT Replication Server setup, AIF monitoring and error handling, Central Payments configuration, Accounting View of Logistics, reconciliation reporting, real-time replication verification, and a consolidated 97-item go-live checklist — grounded entirely in the SAP PRESS reference material and the Central Finance 2020 Configuration & User Guide.
 
 Central Finance is not a reporting layer bolted onto existing ERP systems. It is SAP S/4HANA — deployed first for finance, with logistics onboarding available to the same instance without a subsequent upgrade. Every financial posting from every connected source system — SAP or non-SAP — lands in the Universal Journal (ACDOCA) at full line-item granularity, creating a single source of truth for reporting, planning, consolidation, payments, and compliance across the enterprise.
 
@@ -1512,3 +1512,5 @@ flowchart TD
 | 13 | **SAP LT standalone deployment is recommended** — Installing SAP LT Replication Server on its own dedicated server eliminates patch dependencies on both source and CFIN systems and allows independent performance sizing. |
 | 14 | **Mapping is target-system-centric** — Internal Code Value = CFIN target value; External Code Value = source value. Mappings are always maintained in the CFIN target system, never in the source. |
 | 15 | **AIF archiving must be planned before go-live** — Table `/AIF/PERS_XML` grows rapidly in production. Archive successful messages via `Transaction SARA` / object `/AIF/PERSX`. Never archive error messages that still require reprocessing. |
+
+---
