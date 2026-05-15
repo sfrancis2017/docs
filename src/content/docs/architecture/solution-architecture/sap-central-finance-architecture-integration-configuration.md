@@ -2,12 +2,9 @@
 title: "SAP Central Finance: Architecture, Integration & Configuration"
 description: "SAP Central Finance: Architecture, Integration & Configuration"
 chat-published: true
-published-at: 2026-05-15T23:11:01.079Z
+published-at: 2026-05-15T23:24:00.798Z
 chat-corpus-snapshot: 2026-05-15
 ---
-
-# SAP Central Finance: Architecture, Integration & Configuration
-By I · July 2025
 
 ## Executive Summary
 
@@ -1512,5 +1509,3 @@ flowchart TD
 | 13 | **SAP LT standalone deployment is recommended** — Installing SAP LT Replication Server on its own dedicated server eliminates patch dependencies on both source and CFIN systems and allows independent performance sizing. |
 | 14 | **Mapping is target-system-centric** — Internal Code Value = CFIN target value; External Code Value = source value. Mappings are always maintained in the CFIN target system, never in the source. |
 | 15 | **AIF archiving must be planned before go-live** — Table `/AIF/PERS_XML` grows rapidly in production. Archive successful messages via `Transaction SARA` / object `/AIF/PERSX`. Never archive error messages that still require reprocessing. |
-
----
