@@ -55,6 +55,48 @@ export default defineConfig({
   }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 })();`,
         },
+        // Client-side Mermaid renderer. Starlight + Shiki renders
+        // ```mermaid fenced blocks as <pre data-language="mermaid">; we
+        // swap those for <div class="mermaid"> and run mermaid.js from
+        // CDN to produce inline SVG. Matches the lazy-load pattern used
+        // by chat.sajivfrancis.com. Theme follows current data-theme.
+        {
+          tag: 'script',
+          content: `(function(){
+  function readMermaidText(pre){
+    var lines=pre.querySelectorAll('code .line');
+    if(lines.length){
+      return Array.prototype.map.call(lines,function(l){return l.textContent;}).join('\\n');
+    }
+    return pre.textContent||'';
+  }
+  function init(){
+    var blocks=document.querySelectorAll('pre[data-language="mermaid"]');
+    if(!blocks.length)return;
+    var nodes=[];
+    blocks.forEach(function(pre){
+      var raw=readMermaidText(pre).replace(/\\n+$/,'');
+      var div=document.createElement('div');
+      div.className='mermaid';
+      div.textContent=raw;
+      pre.replaceWith(div);
+      nodes.push(div);
+    });
+    var s=document.createElement('script');
+    s.type='module';
+    s.textContent="import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';"+
+      "var isDark=document.documentElement.dataset.theme==='dark';"+
+      "mermaid.initialize({startOnLoad:false,theme:isDark?'dark':'default',securityLevel:'loose'});"+
+      "mermaid.run({nodes:document.querySelectorAll('.mermaid')});";
+    document.head.appendChild(s);
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init);
+  }else{
+    init();
+  }
+})();`,
+        },
       ],
       customCss: ['./src/styles/custom.css'],
       components: {
