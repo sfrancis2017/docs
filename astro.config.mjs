@@ -64,6 +64,12 @@ export default defineConfig({
           tag: 'script',
           content: `(function(){
   function readMermaidText(pre){
+    // Starlight uses Expressive Code: <pre><code><div class="ec-line"><div class="code">…</div></div>…
+    var ecLines=pre.querySelectorAll('code .ec-line .code');
+    if(ecLines.length){
+      return Array.prototype.map.call(ecLines,function(l){return l.textContent;}).join('\\n');
+    }
+    // Fallback for plain Shiki (<span class="line">) just in case.
     var lines=pre.querySelectorAll('code .line');
     if(lines.length){
       return Array.prototype.map.call(lines,function(l){return l.textContent;}).join('\\n');
@@ -79,7 +85,10 @@ export default defineConfig({
       var div=document.createElement('div');
       div.className='mermaid';
       div.textContent=raw;
-      pre.replaceWith(div);
+      // Swap the entire Expressive Code wrapper (figure + copy button)
+      // when present, otherwise just the <pre>.
+      var wrapper=pre.closest('.expressive-code')||pre;
+      wrapper.replaceWith(div);
       nodes.push(div);
     });
     var s=document.createElement('script');
