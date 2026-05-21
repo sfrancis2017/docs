@@ -14,7 +14,7 @@ This white paper addresses fixed asset accounting in a complex S/4HANA program i
 
 The paper establishes the architectural differences between SAP ECC and S/4HANA Asset Accounting, defines correct migration pathways for fixed assets in a hybrid landscape, addresses the intersection of project-based capitalization with an external costing engine, and provides a reconciliation framework for parallel run and CFIN replication scenarios.
 
-The most urgent finding is addressed at the outset: inventory movement type MT 561 is architecturally incorrect for fixed asset migration or capitalization under any scenario. Its use in this program must stop before any cutover activity proceeds.
+For Fixed Asset migrations, utilizing inventory movement type MT 561 is architecturally incorrect for fixed asset migration or capitalization under any scenario. Its use must stop before any cutover activity proceeds.
 
 ---
 
@@ -22,7 +22,7 @@ The most urgent finding is addressed at the outset: inventory movement type MT 5
 
 A multi-instance, multi-release S/4HANA program introduces three asset accounting risks that do not exist in a standard single-instance implementation.
 
-**Risk 1 — Incorrect capitalization method.** Inventory movement type MT 561 has been proposed as a vehicle to bring assets onto the balance sheet. MT 561 is an opening balance upload for valuated stock. It posts to current asset inventory accounts, creates no asset master record, populates no depreciation area values, and generates no entries in the asset accounting fields of the Universal Journal. Any fixed asset brought in via MT 561 will not depreciate, will not appear in the asset register, and will be misclassified on the balance sheet. The correct paths are the LTMC Migration Cockpit or BAPI_FIXEDASSET_OVRTAKE_CREATE for migrated assets, and account assignment category A on a purchase order for newly procured assets.
+**Risk 1 — Incorrect capitalization method.** Movement type 561 is an opening balance upload for valuated stock. It posts to current asset inventory accounts, creates no asset master record, populates no depreciation area values, and generates no entries in the asset accounting fields of the Universal Journal. Any fixed asset brought in via MT 561 will not depreciate, will not appear in the asset register, and will be misclassified on the balance sheet. The correct paths are the LTMC Migration Cockpit or BAPI_FIXEDASSET_OVRTAKE_CREATE for migrated assets, and account assignment category A on a purchase order for newly procured assets.
 
 **Risk 2 — AUC settlement with an external costing engine.** The external costing engine — referred to throughout this paper as COST — is the permanent system of record for inventory costing. WBS elements accumulate costs priced by COST. Those costs settle to Assets Under Construction (AUC), and AUC settles to fixed assets in FI-AA. The capitalized acquisition cost on the asset master therefore contains a COST-engine-derived component. This creates a three-way reconciliation requirement at AUC settlement — between COST-priced WBS values, S/4HANA CO postings, and final FI-AA asset values — that is not present in a standard S/4HANA implementation and is not addressed by the current program approach.
 
@@ -32,7 +32,7 @@ The ten recommendations at the end of this paper address each risk with specific
 
 ---
 
-## 1. Program Context
+## 1. Context
 
 ### 1.1 Generic Framing
 
@@ -277,9 +277,9 @@ class CFIN_AA,CFIN_GR reporting
 
 ### 3.1 The Critical Design Issue
 
-MT 561 is categorically wrong for fixed asset capitalization. MT 561 is an opening balance upload for valuated stock. It debits a stock inventory account — a current asset on the balance sheet — and credits a stock initial upload offset account. It does not interact with FI-AA, does not create an asset master record, does not post to depreciation areas, and does not generate entries in ACDOCA's asset accounting fields (ANLN1, AFABE, BZDAT).
+MT 561 is categorically wrong for fixed asset capitalization, it is an opening balance upload for valuated stock. It debits a stock inventory account — a current asset on the balance sheet — and credits a stock initial upload offset account. It does not interact with FI-AA, does not create an asset master record, does not post to depreciation areas, and does not generate entries in ACDOCA's asset accounting fields (ANLN1, AFABE, BZDAT).
 
-The confusion likely arises because both an inventory upload and an asset acquisition result in a balance sheet debit. They hit entirely different account classes with entirely different downstream consequences:
+Confusion usually arises because both an inventory upload and an asset acquisition result in a balance sheet debit. They hit entirely different account classes with entirely different downstream consequences:
 
 | | MT 561 — Inventory Upload | Asset Acquisition via FI-AA |
 |---|---|---|
@@ -291,7 +291,7 @@ The confusion likely arises because both an inventory upload and an asset acquis
 | **Audit classification** | Inventory | Fixed asset |
 | **Balance sheet line** | Inventories | Property, plant and equipment |
 
-Using MT 561 for fixed assets produces a balance sheet that overstates inventory, understates fixed assets, understates depreciation expense, and overstates profit. These are material misstatements. In a program with a CFIN layer feeding Group Reporting for statutory consolidation, the error propagates to consolidated financials.
+Using MT 561 for fixed assets produces a balance sheet that overstates inventory, understates fixed assets, understates depreciation expense, and overstates profit. These are material misstatements. In a project with a CFIN layer feeding Group Reporting for statutory consolidation, the error propagates to consolidated financials.
 
 ### 3.2 Asset Acquisition Pathways — Decision Architecture
 
