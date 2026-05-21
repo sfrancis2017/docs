@@ -20,8 +20,6 @@ The most urgent finding is addressed at the outset: inventory movement type MT 5
 
 ## Executive Summary
 
-*For program leadership and finance leads.*
-
 A multi-instance, multi-release S/4HANA program introduces three asset accounting risks that do not exist in a standard single-instance implementation.
 
 **Risk 1 — Incorrect capitalization method.** Inventory movement type MT 561 has been proposed as a vehicle to bring assets onto the balance sheet. MT 561 is an opening balance upload for valuated stock. It posts to current asset inventory accounts, creates no asset master record, populates no depreciation area values, and generates no entries in the asset accounting fields of the Universal Journal. Any fixed asset brought in via MT 561 will not depreciate, will not appear in the asset register, and will be misclassified on the balance sheet. The correct paths are the LTMC Migration Cockpit or BAPI_FIXEDASSET_OVRTAKE_CREATE for migrated assets, and account assignment category A on a purchase order for newly procured assets.
@@ -767,8 +765,6 @@ class REC1,REC2,REC3,REC4,REC5,DELTA_CHECK,BC_CORP_CHECK reporting
 ---
 
 ## Recommendations
-
-*For program leadership, finance leads, and solution architects.*
 
 ### Recommendation 1 — Stop the MT 561 Approach for Assets Immediately
 
