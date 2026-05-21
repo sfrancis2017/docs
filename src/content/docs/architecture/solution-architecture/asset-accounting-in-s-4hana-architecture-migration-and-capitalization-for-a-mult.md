@@ -807,12 +807,3 @@ Before the first AFAB run in S/4HANA for any entity — on either the AB instanc
 The BC Corp Entity holds assets whose depreciation feeds the overhead distribution mechanism that allocates corporate costs to both AB and BC entities. These assets must be fully migrated, linked to the correct cost centers, and validated in a test overhead distribution cycle in the quality system before R3 go-live sign-off. If this gate is missed, the first overhead distribution run post-R3 will allocate understated costs to receiving entities — an error that is difficult to reverse cleanly in a live system.
 
 ---
-
-## Further Reading
-
-- Thomas Saueressig — *SAP S/4HANA Architecture*, Rheinwerk Publishing, 2021
-- Stoil Jotev — *Configuring SAP S/4HANA Finance*, SAP Press, 2021
-- *Financial Reporting with SAP S/4HANA*, SAP Press
-- Narayanan Veeriah — *Financial Accounting in SAP S/4HANA Finance Simplified: Questions and Answers*, BPB Publications, 2024
-- *SAP S/4HANA Migration Cockpit — Migration Object Documentation*
-- *SAP S/4HANA Simplification List — SIMPL_OP2022*
